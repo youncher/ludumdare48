@@ -22,7 +22,7 @@ public class VoidMeter : MonoBehaviour
         {
             value = Mathf.Clamp(value + 1.0f, 0.0f, capacity);
             timePassed = 0.0f;
-            Debug.Log($"meter value is now {value}");
+            // Debug.Log($"meter value is now {value}");
         }
     }
 }
