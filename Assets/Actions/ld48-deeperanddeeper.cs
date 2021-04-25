@@ -167,17 +167,6 @@ public class @Ld48deeperanddeeper : IInputActionCollection, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""8c8e490b-c610-4785-884f-f04217b23ca4"",
-                    ""path"": ""<Pointer>/delta"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": "";Keyboard&Mouse;Touch"",
-                    ""action"": ""Look"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
                     ""id"": ""3e5f5442-8668-4b27-a940-df99bad7e831"",
                     ""path"": ""<Joystick>/{Hatswitch}"",
                     ""interactions"": """",
@@ -767,29 +756,84 @@ public class @Ld48deeperanddeeper : IInputActionCollection, IDisposable
             ""actions"": [
                 {
                     ""name"": ""ProjectileSpin"",
-                    ""type"": ""Button"",
+                    ""type"": ""Value"",
                     ""id"": ""db98d730-f45d-44a2-8653-15c5130e30e0"",
-                    ""expectedControlType"": ""Button"",
+                    ""expectedControlType"": ""Axis"",
                     ""processors"": """",
                     ""interactions"": """"
                 }
             ],
             ""bindings"": [
                 {
-                    ""name"": """",
-                    ""id"": ""cfa31eee-39a1-4085-bfe2-c6540780b79e"",
+                    ""name"": ""1D Axis"",
+                    ""id"": ""e360b42a-7734-4722-b578-7c0917968c77"",
+                    ""path"": ""1DAxis(whichSideWins=1)"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""ProjectileSpin"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""negative"",
+                    ""id"": ""30c85950-7a9f-4205-99d8-57e0743484f8"",
                     ""path"": ""<Keyboard>/a"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Keyboard&Mouse"",
                     ""action"": ""ProjectileSpin"",
                     ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""positive"",
+                    ""id"": ""72e0fd70-9d35-484d-8052-99f891742cad"",
+                    ""path"": ""<Keyboard>/d"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard&Mouse"",
+                    ""action"": ""ProjectileSpin"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""1D Axis"",
+                    ""id"": ""9240101e-ab1e-417b-bc0d-aff42da44767"",
+                    ""path"": ""1DAxis(whichSideWins=1)"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""ProjectileSpin"",
+                    ""isComposite"": true,
                     ""isPartOfComposite"": false
                 },
                 {
+                    ""name"": ""negative"",
+                    ""id"": ""26e65cfb-1186-4e26-ba5a-1edefdfbd9e5"",
+                    ""path"": ""<Gamepad>/leftShoulder"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""ProjectileSpin"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""positive"",
+                    ""id"": ""3c30f6cb-1c4e-44fc-a6d8-0332afaa7e40"",
+                    ""path"": ""<Gamepad>/rightShoulder"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""ProjectileSpin"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
                     ""name"": """",
-                    ""id"": ""0978e509-5d4f-498e-9dba-9aad4f9f710d"",
-                    ""path"": ""<Keyboard>/d"",
+                    ""id"": ""79d2fe40-fd3f-4ad1-ba5b-542d068a9bce"",
+                    ""path"": ""<Pointer>/delta/x"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Keyboard&Mouse"",

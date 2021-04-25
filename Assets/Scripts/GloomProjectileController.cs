@@ -10,9 +10,9 @@ public class GloomProjectileController : MonoBehaviour, Ld48deeperanddeeper.IGlo
     private int activeIdx = -1; // Index of the selected projectile
     private bool spin = false;
     private bool spinClockwise = true;
-    
+
     Ld48deeperanddeeper controls;
-    
+
     public void OnEnable()
     {
         if (controls == null)
@@ -24,16 +24,16 @@ public class GloomProjectileController : MonoBehaviour, Ld48deeperanddeeper.IGlo
         }
         controls.Enable();
     }
-    
+
     // Start is called before the first frame update
     void Start()
     {
         gloomProjectiles = new List<GloomProjectile>();
-        
+
         // Get gloom projectile inventory
-        for(int i = 0; i < transform.childCount; i++)
+        for (int i = 0; i < transform.childCount; i++)
         {
-            if(transform.GetChild(i).CompareTag("GloomProjectile"))
+            if (transform.GetChild(i).CompareTag("GloomProjectile"))
             {
                 gloomProjectiles.Add(transform.GetChild(i).gameObject.GetComponent<GloomProjectile>());
             }
@@ -69,7 +69,7 @@ public class GloomProjectileController : MonoBehaviour, Ld48deeperanddeeper.IGlo
                 transform.Rotate(Vector3.forward * moveSpeed);
             }
         }
-        
+
     }
 
     public void OnProjectileSpin(InputAction.CallbackContext context)
@@ -80,7 +80,7 @@ public class GloomProjectileController : MonoBehaviour, Ld48deeperanddeeper.IGlo
         if (context.phase == InputActionPhase.Started)
         {
             spin = true;
-            spinClockwise = Keyboard.current.dKey.wasPressedThisFrame ? true : false; // TODO - Check if we want to update this to input not limited to having a keyboard
+            spinClockwise = context.ReadValue<float>() > 0;
         }
 
         if (context.phase == InputActionPhase.Canceled)
