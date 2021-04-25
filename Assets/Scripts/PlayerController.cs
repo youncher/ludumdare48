@@ -3,14 +3,13 @@ using UnityEngine.InputSystem;
 
 public class PlayerController : MonoBehaviour, Ld48deeperanddeeper.IPlayerActions
 {
-    // public GloomProjectileController gloomProjectileController;
     public AudioClip ouchSound;
     public AudioClip throwSound;
     public AudioClip walkSound;
     private AudioSource playerAudio;
     private GloomProjectileController gloomProjectileController;
     private AudioSource chargingAudio;
-
+    
     Ld48deeperanddeeper controls;
 
     private bool isCharging;
