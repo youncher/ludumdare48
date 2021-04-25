@@ -31,8 +31,7 @@ public class VoidMeter : MonoBehaviour
             // Debug.Log($"meter value is now {value}");
         }
     }
-
-
+    
     public void SetGloomBar(float gloomValue)
     {
         slider.value = gloomValue;
