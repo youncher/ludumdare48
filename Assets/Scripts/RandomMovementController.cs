@@ -4,7 +4,7 @@ using System.Collections;
 public class RandomMovementController : MonoBehaviour {
 
     public float movementSpeed = 1f;
-    CardinalRenderController renderer;
+    private CardinalRenderController cardinalRenderer;
 
     Rigidbody2D rbody;
     private float decisionCadence = 0.8f; //sec
@@ -19,7 +19,7 @@ public class RandomMovementController : MonoBehaviour {
     private void Awake()
     {
         // rbody = GetComponent<Rigidbody2D>();
-        renderer = GetComponentInChildren<CardinalRenderController>();
+        cardinalRenderer = GetComponentInChildren<CardinalRenderController>();
     }
     private void updatePosition() {
         sendInput();
@@ -30,7 +30,7 @@ public class RandomMovementController : MonoBehaviour {
         inputVector = Vector2.ClampMagnitude(inputVector, 1);
 
         Vector2 target = currentPos + inputVector;
-        renderer.SetDirection(target);
+        cardinalRenderer.SetDirection(target);
 
         float step = movementSpeed * Time.deltaTime;
         transform.position = Vector2.MoveTowards(transform.position, target, step);
