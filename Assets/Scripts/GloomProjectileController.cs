@@ -1,11 +1,29 @@
 using System.Collections.Generic;
+using UnityEngine.InputSystem;
 using UnityEngine;
 
-public class GloomProjectileController : MonoBehaviour
+
+public class GloomProjectileController : MonoBehaviour, Ld48deeperanddeeper.IGloomProjectileControllerActions
 {
     private float moveSpeed = 2.0f;
     private List<GloomProjectile> gloomProjectiles;
     private int activeIdx = -1; // Index of the selected projectile
+    private bool spin = false;
+    private bool spinClockwise = true;
+    
+    Ld48deeperanddeeper controls;
+    
+    public void OnEnable()
+    {
+        if (controls == null)
+        {
+            controls = new Ld48deeperanddeeper();
+            // Tell the "GloomProjectileController" action map that we want to get told about
+            // when actions get triggered.
+            controls.GloomProjectileController.SetCallbacks(this);
+        }
+        controls.Enable();
+    }
     
     // Start is called before the first frame update
     void Start()
@@ -39,8 +57,38 @@ public class GloomProjectileController : MonoBehaviour
             transform.Rotate(Vector3.back * moveSpeed);
         }
 #endif
+
+        if (spin)
+        {
+            if (spinClockwise)
+            {
+                transform.Rotate(Vector3.back * moveSpeed);
+            }
+            else
+            {
+                transform.Rotate(Vector3.forward * moveSpeed);
+            }
+        }
+        
     }
 
+    public void OnProjectileSpin(InputAction.CallbackContext context)
+    {
+        spin = true;
+        Debug.Log($"{context}");
+        Debug.Log($"{context.control}");
+        if (context.phase == InputActionPhase.Started)
+        {
+            spin = true;
+            spinClockwise = Keyboard.current.dKey.wasPressedThisFrame ? true : false; // TODO - Check if we want to update this to input not limited to having a keyboard
+        }
+
+        if (context.phase == InputActionPhase.Canceled)
+        {
+            spin = false;
+        }
+    }
+    
     public void ThrowActiveProjectile()
     {
         Debug.Log("Projectiles count: " + gloomProjectiles.Count);

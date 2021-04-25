@@ -112,30 +112,8 @@ public class @Ld48deeperanddeeper : IInputActionCollection, IDisposable
                 },
                 {
                     ""name"": ""left"",
-                    ""id"": ""d2581a9b-1d11-4566-b27d-b92aff5fabbc"",
-                    ""path"": ""<Keyboard>/a"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": "";Keyboard&Mouse"",
-                    ""action"": ""Move"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": true
-                },
-                {
-                    ""name"": ""left"",
                     ""id"": ""2e46982e-44cc-431b-9f0b-c11910bf467a"",
                     ""path"": ""<Keyboard>/leftArrow"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": "";Keyboard&Mouse"",
-                    ""action"": ""Move"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": true
-                },
-                {
-                    ""name"": ""right"",
-                    ""id"": ""fcfe95b8-67b9-4526-84b5-5d0bc98d6400"",
-                    ""path"": ""<Keyboard>/d"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": "";Keyboard&Mouse"",
@@ -782,6 +760,44 @@ public class @Ld48deeperanddeeper : IInputActionCollection, IDisposable
                     ""isPartOfComposite"": false
                 }
             ]
+        },
+        {
+            ""name"": ""GloomProjectileController"",
+            ""id"": ""d25f56b1-40fa-41c1-93bf-a8070657f9b5"",
+            ""actions"": [
+                {
+                    ""name"": ""ProjectileSpin"",
+                    ""type"": ""Button"",
+                    ""id"": ""db98d730-f45d-44a2-8653-15c5130e30e0"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""cfa31eee-39a1-4085-bfe2-c6540780b79e"",
+                    ""path"": ""<Keyboard>/a"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard&Mouse"",
+                    ""action"": ""ProjectileSpin"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""0978e509-5d4f-498e-9dba-9aad4f9f710d"",
+                    ""path"": ""<Keyboard>/d"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard&Mouse"",
+                    ""action"": ""ProjectileSpin"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
         }
     ],
     ""controlSchemes"": [
@@ -864,6 +880,9 @@ public class @Ld48deeperanddeeper : IInputActionCollection, IDisposable
         m_UI_RightClick = m_UI.FindAction("RightClick", throwIfNotFound: true);
         m_UI_TrackedDevicePosition = m_UI.FindAction("TrackedDevicePosition", throwIfNotFound: true);
         m_UI_TrackedDeviceOrientation = m_UI.FindAction("TrackedDeviceOrientation", throwIfNotFound: true);
+        // GloomProjectileController
+        m_GloomProjectileController = asset.FindActionMap("GloomProjectileController", throwIfNotFound: true);
+        m_GloomProjectileController_ProjectileSpin = m_GloomProjectileController.FindAction("ProjectileSpin", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -1063,6 +1082,39 @@ public class @Ld48deeperanddeeper : IInputActionCollection, IDisposable
         }
     }
     public UIActions @UI => new UIActions(this);
+
+    // GloomProjectileController
+    private readonly InputActionMap m_GloomProjectileController;
+    private IGloomProjectileControllerActions m_GloomProjectileControllerActionsCallbackInterface;
+    private readonly InputAction m_GloomProjectileController_ProjectileSpin;
+    public struct GloomProjectileControllerActions
+    {
+        private @Ld48deeperanddeeper m_Wrapper;
+        public GloomProjectileControllerActions(@Ld48deeperanddeeper wrapper) { m_Wrapper = wrapper; }
+        public InputAction @ProjectileSpin => m_Wrapper.m_GloomProjectileController_ProjectileSpin;
+        public InputActionMap Get() { return m_Wrapper.m_GloomProjectileController; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(GloomProjectileControllerActions set) { return set.Get(); }
+        public void SetCallbacks(IGloomProjectileControllerActions instance)
+        {
+            if (m_Wrapper.m_GloomProjectileControllerActionsCallbackInterface != null)
+            {
+                @ProjectileSpin.started -= m_Wrapper.m_GloomProjectileControllerActionsCallbackInterface.OnProjectileSpin;
+                @ProjectileSpin.performed -= m_Wrapper.m_GloomProjectileControllerActionsCallbackInterface.OnProjectileSpin;
+                @ProjectileSpin.canceled -= m_Wrapper.m_GloomProjectileControllerActionsCallbackInterface.OnProjectileSpin;
+            }
+            m_Wrapper.m_GloomProjectileControllerActionsCallbackInterface = instance;
+            if (instance != null)
+            {
+                @ProjectileSpin.started += instance.OnProjectileSpin;
+                @ProjectileSpin.performed += instance.OnProjectileSpin;
+                @ProjectileSpin.canceled += instance.OnProjectileSpin;
+            }
+        }
+    }
+    public GloomProjectileControllerActions @GloomProjectileController => new GloomProjectileControllerActions(this);
     private int m_KeyboardMouseSchemeIndex = -1;
     public InputControlScheme KeyboardMouseScheme
     {
@@ -1126,5 +1178,9 @@ public class @Ld48deeperanddeeper : IInputActionCollection, IDisposable
         void OnRightClick(InputAction.CallbackContext context);
         void OnTrackedDevicePosition(InputAction.CallbackContext context);
         void OnTrackedDeviceOrientation(InputAction.CallbackContext context);
+    }
+    public interface IGloomProjectileControllerActions
+    {
+        void OnProjectileSpin(InputAction.CallbackContext context);
     }
 }
