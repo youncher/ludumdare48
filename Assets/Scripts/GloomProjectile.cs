@@ -20,7 +20,7 @@ public class GloomProjectile : MonoBehaviour
     private float yPositionDiff;
     
     private bool activelyThrown = false; // true when projectile is actively moving from being thrown
-    private AudioSource audio;
+    private AudioSource gloomAudio;
     
     public GameObject highlightPrefab;
     
@@ -29,7 +29,7 @@ public class GloomProjectile : MonoBehaviour
     void Start()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
-        audio = GetComponent<AudioSource>();
+        gloomAudio = GetComponent<AudioSource>();
     }
 
 
@@ -74,8 +74,8 @@ public class GloomProjectile : MonoBehaviour
     public void ActivateHighlight()
     {
         // TODO: There's overlapping of sounds when changing projectiles too fast. Will need to troubleshoot
-        audio.Stop();
-        audio.Play();
+        gloomAudio.Stop();
+        gloomAudio.Play();
         GameObject highlightObject = Instantiate(highlightPrefab, transform);
         highlightObject.transform.parent = transform;
     }

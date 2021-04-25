@@ -118,24 +118,11 @@ public class RandomMovementController : MonoBehaviour {
         updatePosition();
     }
 
-    void OnCollisionEnter2D(Collision2D col)
-    {
-        var gloomProjectile = col.gameObject.GetComponent<GloomProjectile>();
-        Debug.Log("Enemy OnCollisionEnter2D");
-        if(col.gameObject.tag == "GloomProjectile" && gloomProjectile.GetActivelyThrown())
-        {
-            Debug.Log("collided with GloomProjectile");
-            Destroy(col.gameObject);
-            // TODO: pitch comparison
-            var projectilePitchLower = true;
-            if (projectilePitchLower) {
-                if(isMoving) {
-                    Gameboard.Vacate((int)target.x, (int)target.y);
-                } else {
-                    Gameboard.Vacate((int)transform.position.x, (int)transform.position.y);
-                }
-                Destroy(this.gameObject);
-            }
-        }
+    public bool IsMoving() {
+        return isMoving;
+    }
+
+    public Vector2 Target() {
+        return target;
     }
 }

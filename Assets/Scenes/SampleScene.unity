@@ -69172,6 +69172,7 @@ GameObject:
   - component: {fileID: 431826078}
   - component: {fileID: 431826079}
   - component: {fileID: 431826080}
+  - component: {fileID: 431826081}
   m_Layer: 0
   m_Name: Enemy
   m_TagString: Enemy
@@ -69188,11 +69189,11 @@ AudioSource:
   m_GameObject: {fileID: 431826071}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 24300002, guid: 04451fcc4af4e43b18b8be1e041019b0, type: 2}
+  OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 13fb4548484264ca2a41f333254a2195, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 0.25
-  m_Pitch: 1
+  m_Pitch: 0.85
   Loop: 1
   Mute: 0
   Spatialize: 0
@@ -69474,6 +69475,18 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!114 &431826081
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 431826071}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 46037e532e72da14a80a74d455a2bfa3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
@@ -69674,6 +69687,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1806358132}
     m_Modifications:
+    - target: {fileID: 2110925761, guid: b67da076523324d05943127285c51cec, type: 3}
+      propertyPath: m_Pitch
+      value: 0.9
+      objectReference: {fileID: 0}
+    - target: {fileID: 2110925761, guid: b67da076523324d05943127285c51cec, type: 3}
+      propertyPath: OutputAudioMixerGroup
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 8767321862328584064, guid: b67da076523324d05943127285c51cec, type: 3}
       propertyPath: m_Name
       value: GloomProjectile
@@ -69779,6 +69800,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1806358132}
     m_Modifications:
+    - target: {fileID: 2110925761, guid: b67da076523324d05943127285c51cec, type: 3}
+      propertyPath: m_Pitch
+      value: 0.7
+      objectReference: {fileID: 0}
     - target: {fileID: 8767321862328584064, guid: b67da076523324d05943127285c51cec, type: 3}
       propertyPath: m_Name
       value: GloomProjectile (2)
@@ -69841,6 +69866,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1806358132}
     m_Modifications:
+    - target: {fileID: 2110925761, guid: b67da076523324d05943127285c51cec, type: 3}
+      propertyPath: m_Pitch
+      value: 0.8
+      objectReference: {fileID: 0}
+    - target: {fileID: 2110925761, guid: b67da076523324d05943127285c51cec, type: 3}
+      propertyPath: m_Volume
+      value: 0.3
+      objectReference: {fileID: 0}
     - target: {fileID: 124274630697339679, guid: b67da076523324d05943127285c51cec, type: 3}
       propertyPath: m_IsTrigger
       value: 0
