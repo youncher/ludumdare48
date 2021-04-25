@@ -30,8 +30,10 @@ public class GloomProjectile : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        // Projectile has been thrown
         if (activelyThrown)
         {
+            gameObject.transform.parent = null;
             // Make thrown projectile travel/move
             transform.position = new Vector2(
                 transform.position.x + Time.deltaTime * moveSpeed * xPositionDiff, 
