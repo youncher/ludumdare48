@@ -3,60 +3,90 @@ using System.Collections;
 
 public class RandomMovementController : MonoBehaviour {
 
-    public float movementSpeed = 1f;
+    public float movementSpeed = 5f;
     private CardinalRenderController cardinalRenderer;
 
     Rigidbody2D rbody;
     private float decisionCadence = 0.8f; //sec
     private float sinceLastDecision = 0.0f;
-    private float stateChangeProbability = 0.05f;
+    private float stateChangeProbability = 0.75f;
+    private static int numAxes = 3; //left/right/down
+    private float axisProbability = 1.0f/numAxes; // probability of choosing left/right/down
     private float maxPressDuration = 3.5f;
 
     private float horizontalPressDuration = 0.0f;
     private float verticalPressDuration = 0.0f;
     protected InputBroker inputBroker = new InputBroker();
 
+    private bool isMoving = false;
+    private Vector2 target;
+
     private void Awake()
     {
         // rbody = GetComponent<Rigidbody2D>();
         cardinalRenderer = GetComponentInChildren<CardinalRenderController>();
+        target = new Vector2(transform.position.x, transform.position.y);
     }
     private void updatePosition() {
-        sendInput();
         Vector2 currentPos = new Vector2(transform.position.x, transform.position.y);
-        float horizontalInput = inputBroker.GetAxis("Horizontal");
-        float verticalInput = inputBroker.GetAxis("Vertical");
-        Vector2 inputVector = new Vector2(horizontalInput, verticalInput);
-        inputVector = Vector2.ClampMagnitude(inputVector, 1);
+        if (!isMoving) {
+            sendInput();
+            float horizontalInput = inputBroker.GetAxis("Horizontal");
+            float verticalInput = inputBroker.GetAxis("Vertical");
+            Vector2 inputVector = new Vector2(horizontalInput, verticalInput);
+            Debug.Log($"got input vector {inputVector}");
+            inputVector = Vector2.ClampMagnitude(inputVector, 1);
+            Debug.Log($"clamped input vector {inputVector}");
 
-        Vector2 target = currentPos + inputVector;
-        cardinalRenderer.SetDirection(target);
+            target = currentPos + inputVector;
+            cardinalRenderer.SetDirection(target);
+        }
 
         float step = movementSpeed * Time.deltaTime;
-        transform.position = Vector2.MoveTowards(transform.position, target, step);
+        // float step = Time.deltaTime / 0.8f;
+
+        if (currentPos != target) {
+            isMoving = true;
+            Debug.Log($"now moving to target {target} from {transform.position}");
+            transform.position = Vector2.MoveTowards(transform.position, target, step);
+        } else {
+            isMoving = false;
+        }
     }
 
     protected virtual void sendInput()
     {
         randomInput();
     }
+
     protected void randomInput()
     {
         if (sinceLastDecision > decisionCadence) {
-            bool horizontalChange = Random.Range(0.0f, 1.0f) > stateChangeProbability;
-            if (horizontalChange) {
-                if (!inputBroker.HorizontalPressed()) {
-                    inputBroker.setHorizontal(Random.Range(-1.0f, 1.0f));
-                } else {
-                    inputBroker.setHorizontal(0.0f);
-                }
-            }
-            bool verticalChange = Random.Range(0.0f, 1.0f) > stateChangeProbability;
-            if (verticalChange) {
-                if (!inputBroker.VerticalPressed()) {
-                    inputBroker.setVertical(Random.Range(-1.0f, 0.0f));
-                } else {
-                    inputBroker.setVertical(0.0f);
+            bool positionChange = Random.Range(0.0f, 1.0f) < stateChangeProbability;
+            if (positionChange) {
+                inputBroker.clearInputs();
+                float randomAxis = Random.Range(0.0f, 1.0f);
+                if (randomAxis < axisProbability) { // left
+                    verticalPressDuration = 0.0f;
+                    if (!inputBroker.HorizontalPressed()) {
+                        inputBroker.setHorizontal(-1.0f);
+                    } else {
+                        inputBroker.setHorizontal(0.0f);
+                    }
+                } else if (randomAxis < (2 * axisProbability)) { // right
+                    verticalPressDuration = 0.0f;
+                    if (!inputBroker.HorizontalPressed()) {
+                        inputBroker.setHorizontal(1.0f);
+                    } else {
+                        inputBroker.setHorizontal(0.0f);
+                    }
+                } else { // down
+                    horizontalPressDuration = 0.0f;
+                    if (!inputBroker.VerticalPressed()) {
+                        inputBroker.setVertical(-1.0f);
+                    } else {
+                        inputBroker.setVertical(0.0f);
+                    }
                 }
             }
             sinceLastDecision = 0.0f;

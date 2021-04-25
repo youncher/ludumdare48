@@ -25,4 +25,9 @@ public class InputBroker {
     public void setVertical(float value) {
         currentVertical = value;
     }
+
+    public void clearInputs() {
+        setHorizontal(0.0f);
+        setVertical(0.0f);
+    }
 }

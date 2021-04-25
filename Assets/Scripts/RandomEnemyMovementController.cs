@@ -6,9 +6,9 @@ public class RandomEnemyMovementController : RandomMovementController {
     private float moveThreshhold = 0.15f;
     protected override void sendInput()
     {
-        GameObject player = GameObject.FindGameObjectsWithTag("Player")[0];
-        Vector3 diff = player.transform.position - gameObject.transform.position;
-        float dist = diff.magnitude;
+        // GameObject player = GameObject.FindGameObjectsWithTag("Player")[0];
+        // Vector3 diff = player.transform.position - gameObject.transform.position;
+        // float dist = diff.magnitude;
         randomInput();
     }
     protected void naiveChaseInput(Vector3 diff)

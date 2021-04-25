@@ -74,8 +74,8 @@ public class GloomProjectileController : MonoBehaviour, Ld48deeperanddeeper.IGlo
     public void OnProjectileSpin(InputAction.CallbackContext context)
     {
         spin = true;
-        Debug.Log($"{context}");
-        Debug.Log($"{context.control}");
+        // Debug.Log($"{context}");
+        // Debug.Log($"{context.control}");
         if (context.phase == InputActionPhase.Started)
         {
             spin = true;

@@ -34148,6 +34148,10 @@ MonoBehaviour:
       m_Calls: []
     m_ActionId: db98d730-f45d-44a2-8653-15c5130e30e0
     m_ActionName: GloomProjectileController/ProjectileSpin[/Keyboard/a,/Keyboard/d]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: f6ed847c-3c20-4f0f-bd60-f928168c35bc
+    m_ActionName: Player/SelectInventory[/Keyboard/f]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: Keyboard&Mouse
   m_DefaultActionMap: Player
@@ -34180,7 +34184,7 @@ Grid:
   m_Enabled: 1
   m_CellSize: {x: 1, y: 0.5, z: 1}
   m_CellGap: {x: 0, y: 0, z: 0}
-  m_CellLayout: 3
+  m_CellLayout: 2
   m_CellSwizzle: 0
 --- !u!4 &1761180228
 Transform:
