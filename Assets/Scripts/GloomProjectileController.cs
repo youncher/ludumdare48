@@ -40,23 +40,21 @@ public class GloomProjectileController : MonoBehaviour
 
     public void ThrowActiveProjectile()
     {
-        Debug.Log("Projectiles:" + gloomProjectiles.Count);
-        Debug.Log("Active Projectile Idx:" + activeIdx);
+        Debug.Log("Projectiles count: " + gloomProjectiles.Count);
         
         if (gloomProjectiles.Count > 0)
         {
             GloomProjectile activeProjectile = gloomProjectiles[activeIdx];
             
-            // TODO: throw projectile
-            Debug.Log("Throwing projectile:" + activeIdx);
-            
-            // remove from list & destroy projectile
+            // Throw projectile
+            activeProjectile.ThrowProjectile();
+
+            // Remove from list & destroy projectile
             gloomProjectiles.RemoveAt(activeIdx);
-            Destroy(activeProjectile);
+            Debug.Log("Projectile thrown! Projectiles remaining: " + gloomProjectiles.Count);
             
-            // choose a new active projectile
+            // Choose a new active projectile
             activeIdx = gloomProjectiles.Count > 0 ? gloomProjectiles.Count / 2 : -1;
-            Debug.Log("New activeIdx is now:" + activeIdx);
         }
         else
         {

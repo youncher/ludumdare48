@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class GloomProjectile : MonoBehaviour
@@ -13,11 +14,12 @@ public class GloomProjectile : MonoBehaviour
     private bool increaseColorValue = true;
     private float colorChangeSpeed = 115.0f;
     
-    private float moveSpeed = 1.0f;
+    private float moveSpeed = 8.0f;
     private Vector2 parentPosition;
-    private Vector2 projectilePositionTemp;
+    private float xPositionDiff;
+    private float yPositionDiff;
     
-    
+    private bool activelyThrown = false; // true when projectile is actively moving from being thrown
     
     // Start is called before the first frame update
     void Start()
@@ -28,9 +30,17 @@ public class GloomProjectile : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (activelyThrown)
+        {
+            // Make thrown projectile travel/move
+            transform.position = new Vector2(
+                transform.position.x + Time.deltaTime * moveSpeed * xPositionDiff, 
+                transform.position.y + Time.deltaTime * moveSpeed * yPositionDiff
+            );
+        }
+        
         // Increase or decrease rgb color values of projectile
         colorValue += increaseColorValue ? Time.deltaTime * colorChangeSpeed : -Time.deltaTime * colorChangeSpeed;
-        
         if (colorValue >= MAX_COLOR_VALUE)
         {
             increaseColorValue = false;
@@ -38,8 +48,17 @@ public class GloomProjectile : MonoBehaviour
         {
             increaseColorValue = true;
         }
-
         // Update projectile color
         spriteRenderer.color = new Color(colorValue/255.0f, colorValue/255.0f, (colorValue + BLUE_COLOR_DIFF)/255.0f);
+    }
+
+    public void ThrowProjectile()
+    {
+        // Determine direction of travel by comparing its angle to parent's angle
+        parentPosition = transform.parent.position; 
+        Vector2 initialProjectilePosition = transform.position;
+        xPositionDiff = initialProjectilePosition.x - parentPosition.x;
+        yPositionDiff = initialProjectilePosition.y - parentPosition.y;
+        activelyThrown = true;
     }
 }
