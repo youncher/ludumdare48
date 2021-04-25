@@ -32,6 +32,7 @@ public class GloomProjectile : MonoBehaviour
         audio = GetComponent<AudioSource>();
     }
 
+
     // Update is called once per frame
     void Update()
     {
@@ -82,5 +83,9 @@ public class GloomProjectile : MonoBehaviour
     public void DeactivateHighlight()
     {
         Destroy(gameObject.transform.GetChild(0).gameObject);
+    }
+
+    public bool GetActivelyThrown() {
+        return activelyThrown;
     }
 }

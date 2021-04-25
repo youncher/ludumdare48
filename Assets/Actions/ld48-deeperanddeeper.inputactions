@@ -247,6 +247,28 @@
                     "action": "SelectInventory",
                     "isComposite": false,
                     "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "56f7f313-4abb-42be-b8c4-c00a195ba611",
+                    "path": "<Mouse>/rightButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard&Mouse",
+                    "action": "SelectInventory",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "a8f8ab86-c28e-47a2-9d88-ab41c498f508",
+                    "path": "<Gamepad>/buttonEast",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Gamepad",
+                    "action": "SelectInventory",
+                    "isComposite": false,
+                    "isPartOfComposite": false
                 }
             ]
         },
