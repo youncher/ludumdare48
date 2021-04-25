@@ -20,6 +20,8 @@ public class GloomProjectile : MonoBehaviour
     private float yPositionDiff;
     
     private bool activelyThrown = false; // true when projectile is actively moving from being thrown
+
+    public GameObject highlightPrefab;
     
     // Start is called before the first frame update
     void Start()
@@ -62,5 +64,12 @@ public class GloomProjectile : MonoBehaviour
         xPositionDiff = initialProjectilePosition.x - parentPosition.x;
         yPositionDiff = initialProjectilePosition.y - parentPosition.y;
         activelyThrown = true;
+    }
+
+    // Highlight this projectile to indicate that it is currently selected
+    public void ActivateHighlight()
+    {
+        GameObject highlightObject = Instantiate(highlightPrefab, transform);
+        highlightObject.transform.parent = transform;
     }
 }

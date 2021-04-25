@@ -41,6 +41,7 @@ public class GloomProjectileController : MonoBehaviour, Ld48deeperanddeeper.IGlo
 
         // Select one projectile from inventory
         activeIdx = gloomProjectiles.Count / 2;
+        gloomProjectiles[activeIdx].ActivateHighlight();
     }
 
     // Update is called once per frame
@@ -105,7 +106,15 @@ public class GloomProjectileController : MonoBehaviour, Ld48deeperanddeeper.IGlo
             Debug.Log("Projectile thrown! Projectiles remaining: " + gloomProjectiles.Count);
             
             // Choose a new active projectile
-            activeIdx = gloomProjectiles.Count > 0 ? gloomProjectiles.Count / 2 : -1;
+            if (gloomProjectiles.Count > 0)
+            {
+                activeIdx = gloomProjectiles.Count / 2;
+                gloomProjectiles[activeIdx].ActivateHighlight();
+            }
+            else
+            {
+                activeIdx = -1;
+            }
         }
         else
         {
