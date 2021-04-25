@@ -80,8 +80,17 @@ public class PlayerController : MonoBehaviour, Ld48deeperanddeeper.IPlayerAction
         // Debug.Log($"{context.action}");
         if (context.phase == InputActionPhase.Performed)
         {
+            
             Vector2 input = context.ReadValue<Vector2>();
-            transform.position += new Vector3(input.x, input.y, 0);
+            var destination = transform.position + new Vector3(input.x, input.y, 0);
+            if (Gameboard.Validate((int)destination.x, (int)destination.y)) {
+                // unset old position in grid
+                Gameboard.Vacate((int)transform.position.x, (int)transform.position.y);
+                // hop
+                transform.position = destination;
+                // set new position in grid
+                Gameboard.Occupy((int)transform.position.x, (int)transform.position.y);
+            }
         }
     }
     public void OnLook(InputAction.CallbackContext context)

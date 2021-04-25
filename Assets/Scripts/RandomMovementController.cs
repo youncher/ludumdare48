@@ -20,6 +20,7 @@ public class RandomMovementController : MonoBehaviour {
 
     private bool isMoving = false;
     private Vector2 target;
+    private Vector2 startPos;
 
     private void Awake()
     {
@@ -37,13 +38,16 @@ public class RandomMovementController : MonoBehaviour {
             Debug.Log($"got input vector {inputVector}");
             inputVector = Vector2.ClampMagnitude(inputVector, 1);
             Debug.Log($"clamped input vector {inputVector}");
-
-            target = currentPos + inputVector;
-            cardinalRenderer.SetDirection(target);
+            var destination = currentPos + inputVector;
+            if (Gameboard.Validate((int)destination.x, (int)destination.y)) {
+                Gameboard.Vacate((int)currentPos.x, (int)currentPos.y);
+                target = currentPos + inputVector;
+                Gameboard.Occupy((int)target.x, (int)target.y);
+                cardinalRenderer.SetDirection(target);
+            }
         }
 
         float step = movementSpeed * Time.deltaTime;
-        // float step = Time.deltaTime / 0.8f;
 
         if (currentPos != target) {
             isMoving = true;
