@@ -92,9 +92,9 @@ public class PlayerController : MonoBehaviour, Ld48deeperanddeeper.IPlayerAction
     {
         Debug.Log($"{context}");
         Debug.Log($"{context.control}");
-        gloomProjectileController.ThrowActiveProjectile();
-        if (context.phase == InputActionPhase.Performed)
+        if (context.phase == InputActionPhase.Started)
         {
+            gloomProjectileController.ThrowActiveProjectile();
             startCharging();
         } else if(context.phase == InputActionPhase.Canceled)
         {
@@ -120,6 +120,7 @@ public class PlayerController : MonoBehaviour, Ld48deeperanddeeper.IPlayerAction
     private void stopCharging()
     {
         chargingAudio.loop = false;
+        chargingAudio.Stop();
         isCharging = false;
     }
 }
