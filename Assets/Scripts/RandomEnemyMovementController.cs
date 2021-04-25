@@ -2,7 +2,7 @@ using UnityEngine;
 using System.Collections;
 
 public class RandomEnemyMovementController : RandomMovementController {
-    private float sightRadius = 5;
+    // private float sightRadius = 5;
     private float moveThreshhold = 0.15f;
     protected override void sendInput()
     {

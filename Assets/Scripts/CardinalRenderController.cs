@@ -7,7 +7,7 @@ public class CardinalRenderController : MonoBehaviour
     public static readonly string[] staticDirections = { "Static N", "Static W", "Static S", "Static E" };
     public static readonly string[] runDirections = {"Run N",  "Run W",  "Run S",  "Run E"};
 
-    Animator animator;
+    //Animator animator;
     int lastDirection;
     private bool alive = true;
     // TODO: use audioplayer?
@@ -16,7 +16,7 @@ public class CardinalRenderController : MonoBehaviour
     private void Awake()
     {
         //cache the animator component
-        animator = GetComponent<Animator>();
+        //animator = GetComponent<Animator>();
     }
     private void Start()
     {
@@ -25,7 +25,7 @@ public class CardinalRenderController : MonoBehaviour
     public void Die(){
         alive = false;
         GetComponent<Collider2D>().enabled = false;
-        animator.Play("Death");
+       // animator.Play("Death");
         // audioPlayer.playNooo();
     }
     //called by animation event
@@ -54,7 +54,7 @@ public class CardinalRenderController : MonoBehaviour
             }
 
             //tell the animator to play the requested state
-            animator.Play(directionArray[lastDirection]);
+            //animator.Play(directionArray[lastDirection]);
         }
     }
 

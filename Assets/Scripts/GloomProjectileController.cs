@@ -28,6 +28,8 @@ public class GloomProjectileController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+#if ENABLE_LEGACY_INPUT_MANAGER
+// Old input backends are enabled.
         if (Input.GetKey(KeyCode.A))
         {
             transform.Rotate(Vector3.forward * moveSpeed);
@@ -36,6 +38,7 @@ public class GloomProjectileController : MonoBehaviour
         {
             transform.Rotate(Vector3.back * moveSpeed);
         }
+#endif
     }
 
     public void ThrowActiveProjectile()
