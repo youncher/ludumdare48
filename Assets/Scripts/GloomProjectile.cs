@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class GloomProjectile : MonoBehaviour
@@ -9,14 +7,18 @@ public class GloomProjectile : MonoBehaviour
     private const float BLUE_COLOR_DIFF = 10.0f;
     
     private SpriteRenderer spriteRenderer;
+    
     private Color color;
     private float colorValue = 80.0f;
     private bool increaseColorValue = true;
-    private float colorChangeSpeed = 115.0f;    
+    private float colorChangeSpeed = 115.0f;
+    
     private float moveSpeed = 1.0f;
     private Vector2 parentPosition;
     private Vector2 projectilePositionTemp;
-
+    
+    
+    
     // Start is called before the first frame update
     void Start()
     {

@@ -1,26 +1,28 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
+    // public GloomProjectileController gloomProjectileController;
     public AudioClip ouchSound;
     public AudioClip throwSound;
     public AudioClip walkSound;
     private AudioSource playerAudio;
+    private GloomProjectileController gloomProjectileController;
     
     // Start is called before the first frame update
     void Start()
     {
+        gloomProjectileController = transform.GetChild(0).GetComponent<GloomProjectileController>();
         playerAudio = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        // If throwing
+        // If throwing gloom projectile
         if (Input.GetKeyDown(KeyCode.Space))
         {
+            gloomProjectileController.ThrowActiveProjectile();
             playerAudio.PlayOneShot(throwSound, 1.0f);
         }
         
