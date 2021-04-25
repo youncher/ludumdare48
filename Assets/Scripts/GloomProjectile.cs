@@ -20,13 +20,16 @@ public class GloomProjectile : MonoBehaviour
     private float yPositionDiff;
     
     private bool activelyThrown = false; // true when projectile is actively moving from being thrown
-
+    private AudioSource audio;
+    
     public GameObject highlightPrefab;
+    
     
     // Start is called before the first frame update
     void Start()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
+        audio = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -69,6 +72,9 @@ public class GloomProjectile : MonoBehaviour
     // Highlight this projectile to indicate that it is currently selected
     public void ActivateHighlight()
     {
+        // TODO: There's overlapping of sounds when changing projectiles too fast. Will need to troubleshoot
+        audio.Stop();
+        audio.Play();
         GameObject highlightObject = Instantiate(highlightPrefab, transform);
         highlightObject.transform.parent = transform;
     }
