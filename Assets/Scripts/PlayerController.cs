@@ -29,7 +29,7 @@ public class PlayerController : MonoBehaviour, Ld48deeperanddeeper.IPlayerAction
     // Start is called before the first frame update
     void Start()
     {
-        loomProjectileController = transform.GetChild(0).GetComponent<GloomProjectileController>();
+        gloomProjectileController = transform.GetChild(0).GetComponent<GloomProjectileController>();
         var audioSources = GetComponents<AudioSource>();
         playerAudio = audioSources[0];
         chargingAudio = audioSources[1];
