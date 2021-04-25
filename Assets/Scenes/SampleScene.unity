@@ -69172,6 +69172,7 @@ GameObject:
   - component: {fileID: 431826076}
   - component: {fileID: 431826078}
   - component: {fileID: 431826079}
+  - component: {fileID: 431826080}
   m_Layer: 0
   m_Name: Enemy
   m_TagString: Enemy
@@ -69437,7 +69438,7 @@ BoxCollider2D:
   m_AutoTiling: 0
   serializedVersion: 2
   m_Size: {x: 1, y: 2}
-  m_EdgeRadius: 0
+  m_EdgeRadius: 0.6
 --- !u!111 &431826079
 Animation:
   m_ObjectHideFlags: 0
@@ -69453,6 +69454,27 @@ Animation:
   m_PlayAutomatically: 1
   m_AnimatePhysics: 0
   m_CullingType: 0
+--- !u!50 &431826080
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 431826071}
+  m_BodyType: 1
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 1
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
@@ -69895,6 +69917,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1806358132}
     m_Modifications:
+    - target: {fileID: 124274630697339679, guid: b67da076523324d05943127285c51cec, type: 3}
+      propertyPath: m_IsTrigger
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8767321862328584064, guid: b67da076523324d05943127285c51cec, type: 3}
       propertyPath: m_Name
       value: GloomProjectile (1)
@@ -70868,6 +70894,10 @@ MonoBehaviour:
       m_Calls: []
     m_ActionId: db98d730-f45d-44a2-8653-15c5130e30e0
     m_ActionName: GloomProjectileController/ProjectileSpin[/Keyboard/a,/Keyboard/d]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: f6ed847c-3c20-4f0f-bd60-f928168c35bc
+    m_ActionName: Player/SelectInventory[/Keyboard/f,/Mouse/rightButton,/XInputControllerWindows/buttonEast]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: GloomProjectileController

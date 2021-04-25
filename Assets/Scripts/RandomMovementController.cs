@@ -35,9 +35,7 @@ public class RandomMovementController : MonoBehaviour {
             float horizontalInput = inputBroker.GetAxis("Horizontal");
             float verticalInput = inputBroker.GetAxis("Vertical");
             Vector2 inputVector = new Vector2(horizontalInput, verticalInput);
-            Debug.Log($"got input vector {inputVector}");
             inputVector = Vector2.ClampMagnitude(inputVector, 1);
-            Debug.Log($"clamped input vector {inputVector}");
             var destination = currentPos + inputVector;
             if (Gameboard.Validate((int)destination.x, (int)destination.y)) {
                 Gameboard.Vacate((int)currentPos.x, (int)currentPos.y);
@@ -51,7 +49,7 @@ public class RandomMovementController : MonoBehaviour {
 
         if (currentPos != target) {
             isMoving = true;
-            Debug.Log($"now moving to target {target} from {transform.position}");
+            // Debug.Log($"now moving to target {target} from {transform.position}");
             transform.position = Vector2.MoveTowards(transform.position, target, step);
         } else {
             isMoving = false;
@@ -118,5 +116,26 @@ public class RandomMovementController : MonoBehaviour {
             verticalPressDuration = 0;
         }
         updatePosition();
+    }
+
+    void OnCollisionEnter2D(Collision2D col)
+    {
+        var gloomProjectile = col.gameObject.GetComponent<GloomProjectile>();
+        Debug.Log("Enemy OnCollisionEnter2D");
+        if(col.gameObject.tag == "GloomProjectile" && gloomProjectile.GetActivelyThrown())
+        {
+            Debug.Log("collided with GloomProjectile");
+            Destroy(col.gameObject);
+            // TODO: pitch comparison
+            var projectilePitchLower = true;
+            if (projectilePitchLower) {
+                if(isMoving) {
+                    Gameboard.Vacate((int)target.x, (int)target.y);
+                } else {
+                    Gameboard.Vacate((int)transform.position.x, (int)transform.position.y);
+                }
+                Destroy(this.gameObject);
+            }
+        }
     }
 }
