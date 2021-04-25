@@ -41,6 +41,14 @@ public class @Ld48deeperanddeeper : IInputActionCollection, IDisposable
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """"
+                },
+                {
+                    ""name"": ""SelectInventory"",
+                    ""type"": ""Button"",
+                    ""id"": ""f6ed847c-3c20-4f0f-bd60-f928168c35bc"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
                 }
             ],
             ""bindings"": [
@@ -239,6 +247,17 @@ public class @Ld48deeperanddeeper : IInputActionCollection, IDisposable
                     ""processors"": """",
                     ""groups"": ""Keyboard&Mouse"",
                     ""action"": ""Fire"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""7c73892d-ae5a-4717-8a75-7f038af26eb3"",
+                    ""path"": ""<Keyboard>/f"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard&Mouse"",
+                    ""action"": ""SelectInventory"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -912,6 +931,7 @@ public class @Ld48deeperanddeeper : IInputActionCollection, IDisposable
         m_Player_Move = m_Player.FindAction("Move", throwIfNotFound: true);
         m_Player_Look = m_Player.FindAction("Look", throwIfNotFound: true);
         m_Player_Fire = m_Player.FindAction("Fire", throwIfNotFound: true);
+        m_Player_SelectInventory = m_Player.FindAction("SelectInventory", throwIfNotFound: true);
         // UI
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
         m_UI_Navigate = m_UI.FindAction("Navigate", throwIfNotFound: true);
@@ -979,6 +999,7 @@ public class @Ld48deeperanddeeper : IInputActionCollection, IDisposable
     private readonly InputAction m_Player_Move;
     private readonly InputAction m_Player_Look;
     private readonly InputAction m_Player_Fire;
+    private readonly InputAction m_Player_SelectInventory;
     public struct PlayerActions
     {
         private @Ld48deeperanddeeper m_Wrapper;
@@ -986,6 +1007,7 @@ public class @Ld48deeperanddeeper : IInputActionCollection, IDisposable
         public InputAction @Move => m_Wrapper.m_Player_Move;
         public InputAction @Look => m_Wrapper.m_Player_Look;
         public InputAction @Fire => m_Wrapper.m_Player_Fire;
+        public InputAction @SelectInventory => m_Wrapper.m_Player_SelectInventory;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -1004,6 +1026,9 @@ public class @Ld48deeperanddeeper : IInputActionCollection, IDisposable
                 @Fire.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnFire;
                 @Fire.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnFire;
                 @Fire.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnFire;
+                @SelectInventory.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnSelectInventory;
+                @SelectInventory.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnSelectInventory;
+                @SelectInventory.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnSelectInventory;
             }
             m_Wrapper.m_PlayerActionsCallbackInterface = instance;
             if (instance != null)
@@ -1017,6 +1042,9 @@ public class @Ld48deeperanddeeper : IInputActionCollection, IDisposable
                 @Fire.started += instance.OnFire;
                 @Fire.performed += instance.OnFire;
                 @Fire.canceled += instance.OnFire;
+                @SelectInventory.started += instance.OnSelectInventory;
+                @SelectInventory.performed += instance.OnSelectInventory;
+                @SelectInventory.canceled += instance.OnSelectInventory;
             }
         }
     }
@@ -1209,6 +1237,7 @@ public class @Ld48deeperanddeeper : IInputActionCollection, IDisposable
         void OnMove(InputAction.CallbackContext context);
         void OnLook(InputAction.CallbackContext context);
         void OnFire(InputAction.CallbackContext context);
+        void OnSelectInventory(InputAction.CallbackContext context);
     }
     public interface IUIActions
     {

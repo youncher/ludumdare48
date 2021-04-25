@@ -39,9 +39,7 @@ public class GloomProjectileController : MonoBehaviour, Ld48deeperanddeeper.IGlo
             }
         }
 
-        // Select one projectile from inventory
-        activeIdx = gloomProjectiles.Count / 2;
-        gloomProjectiles[activeIdx].ActivateHighlight();
+        AutoSetActiveProjectile();
     }
 
     // Update is called once per frame
@@ -108,8 +106,7 @@ public class GloomProjectileController : MonoBehaviour, Ld48deeperanddeeper.IGlo
             // Choose a new active projectile
             if (gloomProjectiles.Count > 0)
             {
-                activeIdx = gloomProjectiles.Count / 2;
-                gloomProjectiles[activeIdx].ActivateHighlight();
+                AutoSetActiveProjectile();
             }
             else
             {
@@ -121,5 +118,35 @@ public class GloomProjectileController : MonoBehaviour, Ld48deeperanddeeper.IGlo
             // TODO - Let the user know or make a sound that they don't have any projectiles
             Debug.Log("You have no projectiles to throw!");
         }
+    }
+
+    private void AutoSetActiveProjectile()
+    {
+        activeIdx = gloomProjectiles.Count / 2;
+        gloomProjectiles[activeIdx].ActivateHighlight();
+    }
+
+    // Cycle through inventory to select projectile
+    public void SelectNextProjectile()
+    {
+        // No need to select projectiles if you have 0-1 of them
+        if (gloomProjectiles.Count <= 1)
+        {
+            return;
+        }
+
+        // Remove highlight of current active projectile
+        gloomProjectiles[activeIdx].DeactivateHighlight();
+        
+        // Select next projectile by counting up idx position. Or if at the end, go back to the beginning of inventory
+        if (activeIdx + 1 < gloomProjectiles.Count)
+        {
+            activeIdx++; 
+        }
+        else
+        {
+            activeIdx = 0;
+        }
+        gloomProjectiles[activeIdx].ActivateHighlight();
     }
 }

@@ -72,4 +72,9 @@ public class GloomProjectile : MonoBehaviour
         GameObject highlightObject = Instantiate(highlightPrefab, transform);
         highlightObject.transform.parent = transform;
     }
+    
+    public void DeactivateHighlight()
+    {
+        Destroy(gameObject.transform.GetChild(0).gameObject);
+    }
 }

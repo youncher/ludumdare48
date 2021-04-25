@@ -75,9 +75,9 @@ public class PlayerController : MonoBehaviour, Ld48deeperanddeeper.IPlayerAction
     }
     public void OnMove(InputAction.CallbackContext context)
     {
-        Debug.Log($"{context}");
-        Debug.Log($"{context.control}");
-        Debug.Log($"{context.action}");
+        // Debug.Log($"{context}");
+        // Debug.Log($"{context.control}");
+        // Debug.Log($"{context.action}");
         if (context.phase == InputActionPhase.Performed)
         {
             Vector2 input = context.ReadValue<Vector2>();
@@ -90,8 +90,8 @@ public class PlayerController : MonoBehaviour, Ld48deeperanddeeper.IPlayerAction
     }
     public void OnFire(InputAction.CallbackContext context)
     {
-        Debug.Log($"{context}");
-        Debug.Log($"{context.control}");
+        // Debug.Log($"{context}");
+        // Debug.Log($"{context.control}");
         if (context.phase == InputActionPhase.Started)
         {
             gloomProjectileController.ThrowActiveProjectile();
@@ -99,6 +99,14 @@ public class PlayerController : MonoBehaviour, Ld48deeperanddeeper.IPlayerAction
         } else if(context.phase == InputActionPhase.Canceled)
         {
             stopCharging();
+        }
+    }
+
+    public void OnSelectInventory(InputAction.CallbackContext context)
+    {
+        if (context.phase == InputActionPhase.Started)
+        {
+            gloomProjectileController.SelectNextProjectile();
         }
     }
 
