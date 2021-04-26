@@ -10,15 +10,20 @@ public class EnemyController : MonoBehaviour
     public float AnnounceFreqSec = 2.0f;
     public AudioClip AnnounceSound;
     private float sinceLastAnnounce = 0.0f;
+    private float minPitch = GloomProjectile.MinGloomPitch();
+    private float maxPitch = GloomProjectile.MaxGloomPitch();
+
+    private float minOffsetFromGloom = 10.0f;
 
     void OnEnable()
     {
         moveController = GetComponent<RandomEnemyMovementController>();
         enemyAudio = GetComponent<AudioSource>();
+        enemyAudio.pitch = Random.Range(minOffsetFromGloom + minPitch, maxPitch);
     }
     void Start()
     {
-        
+        sinceLastAnnounce = Random.Range(-AnnounceFreqSec, AnnounceFreqSec);
     }
 
     // Update is called once per frame

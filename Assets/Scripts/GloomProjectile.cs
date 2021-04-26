@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class GloomProjectile : MonoBehaviour
 {
-    private const float MAX_GLOOM_PITCH = 3.0f;
+    private const float MAX_GLOOM_PITCH = 2.0f;
     private const float MIN_GLOOM_PITCH = 0.25f; // It's hard to hear the pitch lower than this
 
     private const float MAX_COLOR_VALUE = 100.0f;
