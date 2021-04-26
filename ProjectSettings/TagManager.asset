@@ -9,6 +9,8 @@ TagManager:
   - EnemySuccess
   - GloomProjectileController
   - JoyProjectile
+  - GameManager
+  - GameOverDisplay
   layers:
   - Default
   - TransparentFX

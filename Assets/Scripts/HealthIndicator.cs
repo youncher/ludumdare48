@@ -1,15 +1,18 @@
+using System;
 using TMPro;
 using UnityEngine;
 
 public class HealthIndicator : MonoBehaviour
 {
     private const int MAX_LIFE = 3;
-    
+
+    private GameManager gameManager;
     public int currentLife = MAX_LIFE;
     public TextMeshProUGUI text;
     
-    private void Start()
+    void Start()
     {
+        gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
         text = GameObject.Find("RemainingLife").GetComponent<TextMeshProUGUI>();
         text.SetText(currentLife.ToString());
     }
@@ -21,6 +24,11 @@ public class HealthIndicator : MonoBehaviour
         {
             currentLife--;
             text.SetText(currentLife.ToString());
+        }
+
+        if (currentLife <= 0)
+        {
+            gameManager.HandleGameOver("lose");
         }
     }
 }
