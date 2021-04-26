@@ -10,54 +10,42 @@ public class Gameboard : MonoBehaviour
     public static bool[,] grid;
     public static int columns = 100;
     public static int rows = 50;
-    public static Mutex m = new Mutex(false, "gameBoardMutex");
     public static bool Validate(int x, int y)
     { 
-        m.WaitOne();
         // check if moving to this location is valid
         // within bounds?
         if (x < 0 || x > columns - 1) {
-            m.ReleaseMutex();
             return false;
         }
         if (y < 0 || y > rows - 1) {
-            m.ReleaseMutex();
             return false;
         }
 
         // empty destination?
         if (grid[x, y]) {
-            m.ReleaseMutex();
             return false;
         }
-        m.ReleaseMutex();
         return true;
 
     }
     public static void Occupy (int x, int y)
     {
-        m.WaitOne();
         if (grid[x, y])
         {
             Debug.Log("[Error] - occupying an already occupied grid cell");
-            m.ReleaseMutex();
             return;
         }
         grid[x, y] = true;
-        m.ReleaseMutex();
     }
 
     public static void Vacate (int x, int y)
     {
-        m.WaitOne();
         if (!grid[x, y])
         {
             Debug.Log("[Error] - vacating an already vacated grid cell");
-            m.ReleaseMutex();
             return;
         }
         grid[x, y] = false;
-        m.ReleaseMutex();
     }
 
     void OnEnable()
