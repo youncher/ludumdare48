@@ -170,4 +170,25 @@ public class PlayerController : MonoBehaviour, Ld48deeperanddeeper.IPlayerAction
         chargeBegValue = 0.0f;
         chargeEndValue = 0.0f;
     }
+
+    void OnCollisionStay2D(Collision2D col)
+    {
+        CollisionHandler(col);
+    }
+
+    void OnCollisionEnter2D(Collision2D col)
+    {
+        CollisionHandler(col);
+    }
+    private void CollisionHandler(Collision2D col)
+    {
+        if (!col.gameObject.CompareTag("JoyProjectile"))
+        {
+            return;
+        }
+        Debug.Log("Player OnCollision 2D JoyProjectile");
+        Destroy(col.gameObject);            
+        var hi = FindObjectOfType<HealthIndicator>();
+        hi.ReduceLife();
+    }
 }
