@@ -59,6 +59,8 @@ public class EnemyController : MonoBehaviour
                     Gameboard.Vacate((int)transform.position.x, (int)transform.position.y);
                 }
                 Destroy(this.gameObject);
+                var kc = FindObjectOfType<KillIndicator>();
+                kc.IncrementKills();
             } else {
                 Debug.Log("collided with a thrown gloom projectile who's pitch was higher");
             }
