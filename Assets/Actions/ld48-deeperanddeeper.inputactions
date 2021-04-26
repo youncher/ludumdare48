@@ -843,6 +843,28 @@
                 },
                 {
                     "name": "",
+                    "id": "d521db97-e009-455d-8d5d-a879117c01d6",
+                    "path": "<Gamepad>/buttonWest",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Gamepad",
+                    "action": "CheckGloomPitch",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "4a606eed-fd02-4eee-9cbc-0de836c907af",
+                    "path": "<Mouse>/backButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard&Mouse",
+                    "action": "CheckGloomPitch",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
                     "id": "8c1c90d8-8627-49c5-b688-df632a03d8a5",
                     "path": "<Pointer>/delta/x",
                     "interactions": "",
