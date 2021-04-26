@@ -40,6 +40,7 @@ public class EnemyController : MonoBehaviour
             // Shoot JoyProjectile
             // instantiate
             GameObject projectileGO = Instantiate(JoyProjectilePrefab, transform);
+            projectileGO.transform.parent = null;
             // player direction
             JoyProjectile joyProjectile = projectileGO.GetComponent<JoyProjectile>();
             var projectilePos = new Vector2(projectileGO.transform.position.x, projectileGO.transform.position.y);
