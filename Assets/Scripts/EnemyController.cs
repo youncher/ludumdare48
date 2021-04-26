@@ -7,6 +7,10 @@ public class EnemyController : MonoBehaviour
     RandomMovementController moveController;
     AudioSource enemyAudio;
 
+    public float AnnounceFreqSec = 2.0f;
+    public AudioClip AnnounceSound;
+    private float sinceLastAnnounce = 0.0f;
+
     void OnEnable()
     {
         moveController = GetComponent<RandomEnemyMovementController>();
@@ -20,6 +24,11 @@ public class EnemyController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        sinceLastAnnounce += Time.deltaTime;
+        if (sinceLastAnnounce >= AnnounceFreqSec) {
+            enemyAudio.PlayOneShot(AnnounceSound, enemyAudio.volume);
+            sinceLastAnnounce = 0.0f;
+        }
         
     }
     void OnCollisionStay2D(Collision2D col)
