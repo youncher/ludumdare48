@@ -27,10 +27,9 @@ public class GameManager : MonoBehaviour
         gameOverDisplay.DisplayGameOver(winStatus);
     }
     
-    // TODO update "SampleScene" name to something else
     public void LoadLevel1()
     {
-        SceneManager.LoadScene("SampleScene");
+        SceneManager.LoadScene("Level1Scene");
     }
 
     public void LoadMenu()
