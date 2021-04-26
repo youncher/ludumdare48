@@ -6,7 +6,7 @@ public class RandomMovementController : MonoBehaviour {
     public float movementSpeed = 5f;
     private CardinalRenderController cardinalRenderer;
 
-    Rigidbody2D rbody;
+    Rigidbody2D rb2D;
     private float decisionCadence = 0.8f; //sec
     private float sinceLastDecision = 0.0f;
     private float stateChangeProbability = 0.75f;
@@ -24,7 +24,7 @@ public class RandomMovementController : MonoBehaviour {
 
     private void Awake()
     {
-        // rbody = GetComponent<Rigidbody2D>();
+        rb2D = GetComponent<Rigidbody2D>();
         cardinalRenderer = GetComponentInChildren<CardinalRenderController>();
         target = new Vector2(transform.position.x, transform.position.y);
     }
@@ -34,19 +34,18 @@ public class RandomMovementController : MonoBehaviour {
             sendInput();
             float horizontalInput = inputBroker.GetAxis("Horizontal");
             float verticalInput = inputBroker.GetAxis("Vertical");
-            Vector2 inputVector = new Vector2(horizontalInput, verticalInput);
-            inputVector = Vector2.ClampMagnitude(inputVector, 1);
+            Vector2 inputVector = new Vector2(horizontalInput, verticalInput) * Gameboard.worldToGridRatio;
+            inputVector = Vector2.ClampMagnitude(inputVector, Gameboard.worldToGridRatio);
             var destination = currentPos + inputVector;
-            if (Gameboard.Validate((int)destination.x, (int)destination.y)) {
-                Gameboard.Vacate((int)currentPos.x, (int)currentPos.y);
+            if (Gameboard.ValidateByWorldPos(destination)) {
+                Gameboard.VacateByWorldPos(currentPos);
                 target = currentPos + inputVector;
-                Gameboard.Occupy((int)target.x, (int)target.y);
+                Gameboard.OccupyByWorldPos(target);
                 cardinalRenderer.SetDirection(target);
             }
         }
 
-        float step = movementSpeed * Time.deltaTime;
-
+        float step = movementSpeed * Time.fixedDeltaTime;
         if (currentPos != target) {
             isMoving = true;
             // Debug.Log($"now moving to target {target} from {transform.position}");
@@ -115,6 +114,10 @@ public class RandomMovementController : MonoBehaviour {
         } else {
             verticalPressDuration = 0;
         }
+        // updatePosition();
+    }
+
+    void FixedUpdate() {
         updatePosition();
     }
 

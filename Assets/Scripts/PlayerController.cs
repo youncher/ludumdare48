@@ -81,15 +81,15 @@ public class PlayerController : MonoBehaviour, Ld48deeperanddeeper.IPlayerAction
         if (context.phase == InputActionPhase.Performed)
         {
             
-            Vector2 input = context.ReadValue<Vector2>();
+            Vector2 input = context.ReadValue<Vector2>() * Gameboard.worldToGridRatio;
             var destination = transform.position + new Vector3(input.x, input.y, 0);
-            if (Gameboard.Validate((int)destination.x, (int)destination.y)) {
+            if (Gameboard.ValidateByWorldPos(destination)) {
                 // unset old position in grid
-                Gameboard.Vacate((int)transform.position.x, (int)transform.position.y);
+                Gameboard.VacateByWorldPos(new Vector2(transform.position.x, transform.position.y));
                 // hop
                 transform.position = destination;
                 // set new position in grid
-                Gameboard.Occupy((int)transform.position.x, (int)transform.position.y);
+                Gameboard.OccupyByWorldPos(new Vector2(transform.position.x, transform.position.y));
             }
         }
     }

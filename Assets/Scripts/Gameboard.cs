@@ -8,8 +8,24 @@ public class Gameboard : MonoBehaviour
 
     // lets try tracking as bools ....[horizontal][vertical] (aka, [column][row], [x][y])
     public static bool[,] grid;
-    public static int columns = 100;
-    public static int rows = 50;
+    public static int columns = 50;
+    public static int rows = 25;
+
+    public static int worldToGridRatio = 2;
+
+    public static Vector2 ConvertGridToWorld(Vector2 worldVec) {
+        return worldToGridRatio * worldVec;
+    }
+
+    public static Vector2 ConvertWorldToGrid(Vector2 gridVec) {
+        return gridVec / worldToGridRatio;
+    }
+    
+    public static bool ValidateByWorldPos(Vector2 worldPos)
+    {
+        var pos = ConvertWorldToGrid(worldPos);
+        return Validate((int)pos.x, (int)pos.y);
+    }
     public static bool Validate(int x, int y)
     { 
         // check if moving to this location is valid
@@ -28,6 +44,11 @@ public class Gameboard : MonoBehaviour
         return true;
 
     }
+    public static void OccupyByWorldPos(Vector2 worldPos)
+    {
+        var pos = ConvertWorldToGrid(worldPos);
+        Occupy((int)pos.x, (int)pos.y);
+    }
     public static void Occupy (int x, int y)
     {
         if (grid[x, y])
@@ -38,6 +59,11 @@ public class Gameboard : MonoBehaviour
         grid[x, y] = true;
     }
 
+    public static void VacateByWorldPos(Vector2 worldPos)
+    {
+        var pos = ConvertWorldToGrid(worldPos);
+        Vacate((int)pos.x, (int)pos.y);
+    }
     public static void Vacate (int x, int y)
     {
         if (!grid[x, y])
@@ -55,12 +81,14 @@ public class Gameboard : MonoBehaviour
         GameObject[] players = GameObject.FindGameObjectsWithTag("Player");
         foreach (var p in players)
         {
-            grid[(int)p.transform.position.x, (int)p.transform.position.y] = true;
+            var convertedPosition = ConvertWorldToGrid(new Vector2(p.transform.position.x, p.transform.position.y));
+            grid[(int)convertedPosition.x, (int)convertedPosition.y] = true;
         }
         GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
         foreach (var e in enemies)
         {
-            grid[(int)e.transform.position.x, (int)e.transform.position.y] = true;
+            var convertedPosition = ConvertWorldToGrid(new Vector2(e.transform.position.x, e.transform.position.y));
+            grid[(int)convertedPosition.x, (int)convertedPosition.y] = true;
         }
 
     }
