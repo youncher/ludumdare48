@@ -23,6 +23,10 @@ public class Gameboard : MonoBehaviour
     
     public static bool ValidateByWorldPos(Vector2 worldPos)
     {
+        if (!InBoundsByWorldPos(worldPos))
+        {
+            Debug.Log("[Error] - Validate request out of bounds");
+        }
         var pos = ConvertWorldToGrid(worldPos);
         return Validate((int)pos.x, (int)pos.y);
     }
@@ -30,12 +34,11 @@ public class Gameboard : MonoBehaviour
     { 
         // check if moving to this location is valid
         // within bounds?
-        if (x < 0 || x > columns - 1) {
+        if (!InBounds(x, y))
+        {
             return false;
         }
-        if (y < 0 || y > rows - 1) {
-            return false;
-        }
+        
 
         // empty destination?
         if (grid[x, y]) {
@@ -44,13 +47,48 @@ public class Gameboard : MonoBehaviour
         return true;
 
     }
+
+    public static bool InBoundsByWorldPos(Vector2 worldPos)
+    {
+        var gridPos = ConvertWorldToGrid(worldPos);
+        var x = (int)gridPos.x;
+        var y = (int)gridPos.y;
+        if (x < 0 || x > columns - 1) {
+            return false;
+        }
+        if (y < 0 || y > rows - 1) {
+            return false;
+        }
+        return true;
+    }
+
+    public static bool InBounds(int x, int y)
+    {
+        if (x < 0 || x > columns - 1) {
+            return false;
+        }
+        if (y < 0 || y > rows - 1) {
+            return false;
+        }
+        return true;
+    }
     public static void OccupyByWorldPos(Vector2 worldPos)
     {
+        if (!InBoundsByWorldPos(worldPos))
+        {
+            Debug.Log("[Error] - OccupyByWorldPos request out of bounds");
+            return;
+        }
         var pos = ConvertWorldToGrid(worldPos);
         Occupy((int)pos.x, (int)pos.y);
     }
-    public static void Occupy (int x, int y)
+    public static void Occupy(int x, int y)
     {
+        if (!InBounds(x, y))
+        {
+            Debug.Log("[Error] - Occupy request out of bounds");
+            return;
+        }
         if (grid[x, y])
         {
             Debug.Log("[Error] - occupying an already occupied grid cell");
@@ -61,11 +99,21 @@ public class Gameboard : MonoBehaviour
 
     public static void VacateByWorldPos(Vector2 worldPos)
     {
+        if (!InBoundsByWorldPos(worldPos))
+        {
+            Debug.Log("[Error] - VacateByWorldPos request out of bounds");
+            return;
+        }
         var pos = ConvertWorldToGrid(worldPos);
         Vacate((int)pos.x, (int)pos.y);
     }
-    public static void Vacate (int x, int y)
+    public static void Vacate(int x, int y)
     {
+        if (!InBounds(x, y))
+        {
+            Debug.Log("[Error] - Vacate request out of bounds");
+            return;
+        }
         if (!grid[x, y])
         {
             Debug.Log("[Error] - vacating an already vacated grid cell");
