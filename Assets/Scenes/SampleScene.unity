@@ -71573,10 +71573,6 @@ MonoBehaviour:
     m_ActionName: UI/TrackedDeviceOrientation
   - m_PersistentCalls:
       m_Calls: []
-    m_ActionId: db98d730-f45d-44a2-8653-15c5130e30e0
-    m_ActionName: GloomProjectileController/ProjectileSpin[/Keyboard/a,/Keyboard/d]
-  - m_PersistentCalls:
-      m_Calls: []
     m_ActionId: f6ed847c-3c20-4f0f-bd60-f928168c35bc
     m_ActionName: Player/SelectInventory[/Keyboard/f]
   - m_PersistentCalls:
@@ -71989,10 +71985,6 @@ MonoBehaviour:
       m_Calls: []
     m_ActionId: 5757ff72-6807-4bf9-82f4-fccb143057e0
     m_ActionName: UI/TrackedDeviceOrientation
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: db98d730-f45d-44a2-8653-15c5130e30e0
-    m_ActionName: GloomProjectileController/ProjectileSpin[/Keyboard/a,/Keyboard/d]
   - m_PersistentCalls:
       m_Calls: []
     m_ActionId: f6ed847c-3c20-4f0f-bd60-f928168c35bc

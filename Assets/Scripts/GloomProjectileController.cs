@@ -11,11 +11,13 @@ public class GloomProjectileController : MonoBehaviour, Ld48deeperanddeeper.IGlo
     public GameObject gloomPosition3;
     
     private const int MAX_GLOOM_PROJECTILES = 3;
-    private float moveSpeed = 2.0f;
+    private float moveSpeed = 300.0f;
     private List<GloomProjectile> gloomProjectiles;
     private int activeIdx = -1; // Index of the selected projectile
-    private bool spin = false;
-    private bool spinClockwise = true;
+    // private bool spin = false;
+    // private bool spinClockwise = true;
+
+    private float spinVal = 0.0f;
 
     Ld48deeperanddeeper controls;
 
@@ -64,48 +66,25 @@ public class GloomProjectileController : MonoBehaviour, Ld48deeperanddeeper.IGlo
         }
 #endif
 
-        if (spin)
-        {
-            if (spinClockwise)
-            {
-                transform.Rotate(Vector3.back * moveSpeed);
-            }
-            else
-            {
-                transform.Rotate(Vector3.forward * moveSpeed);
-            }
-        }
-
+        // if (spin)
+        // {
+        //     if (spinClockwise)
+        //     {
+        //         transform.Rotate(Vector3.back * moveSpeed * Time.deltaTime);
+        //     }
+        //     else
+        //     {
+        //         transform.Rotate(Vector3.forward * moveSpeed * Time.deltaTime);
+        //     }
+        // }
+        transform.Rotate(Vector3.forward * spinVal * moveSpeed * Time.deltaTime);
     }
 
-    public void OnProjectileSpinLeft(InputAction.CallbackContext context)
+    public void OnProjectileSpin(InputAction.CallbackContext context)
     {
-        spin = true;
         // Debug.Log($"{context}");
         // Debug.Log($"{context.control}");
-        if (context.phase == InputActionPhase.Started)
-        {
-            spinClockwise = false;
-        }
-        if (context.phase == InputActionPhase.Canceled)
-        {
-            spin = false;
-        }
-    }
-
-    public void OnProjectileSpinRight(InputAction.CallbackContext context)
-    {
-        spin = true;
-        // Debug.Log($"{context}");
-        // Debug.Log($"{context.control}");
-        if (context.phase == InputActionPhase.Started)
-        {
-            spinClockwise = true;
-        }
-        if (context.phase == InputActionPhase.Canceled)
-        {
-            spin = false;
-        }
+        spinVal = context.ReadValue<float>();
     }
     
     public void OnCheckGloomPitch(InputAction.CallbackContext context)
