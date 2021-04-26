@@ -71,6 +71,15 @@ public class PlayerController : MonoBehaviour, Ld48deeperanddeeper.IPlayerAction
         if (isCharging)
         {
             bool meterHasMoreJuice = voidMeter.DecreaseMeter();
+            float maxPitch = GloomProjectile.MaxGloomPitch();
+            float minPitch = GloomProjectile.MinGloomPitch();
+
+            float currentCharge = voidMeter.GetValue();
+            float meterMaxValue = voidMeter.GetCapacity();
+            float meterJuiceObtained = chargeBegValue - currentCharge;
+            float meterJuiceObtainedPercentage = meterJuiceObtained / meterMaxValue;
+
+            chargingAudio.pitch = Mathf.Clamp(maxPitch - (maxPitch * meterJuiceObtainedPercentage), minPitch, maxPitch);
         }
     }
     public void OnMove(InputAction.CallbackContext context)

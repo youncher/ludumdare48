@@ -105,6 +105,16 @@ public class GloomProjectile : MonoBehaviour
     // Parameter: meterPercent - % of meter used to create gloom
     public void SetGloomPitch(float meterPercent)
     {
-        gloomAudio.pitch = Mathf.Clamp(MAX_GLOOM_PITCH - (MAX_GLOOM_PITCH * meterPercent), MIN_GLOOM_PITCH, MAX_GLOOM_PITCH);;
+        gloomAudio.pitch = Mathf.Clamp(MAX_GLOOM_PITCH - (MAX_GLOOM_PITCH * meterPercent), MIN_GLOOM_PITCH, MAX_GLOOM_PITCH);
+    }
+
+    public static float MaxGloomPitch()
+    {
+        return MAX_GLOOM_PITCH;
+    }
+
+    public static float MinGloomPitch()
+    {
+        return MIN_GLOOM_PITCH;
     }
 }

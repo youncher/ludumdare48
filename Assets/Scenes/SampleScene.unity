@@ -69194,7 +69194,7 @@ AudioSource:
   m_GameObject: {fileID: 431826071}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: 24300002, guid: 04451fcc4af4e43b18b8be1e041019b0, type: 2}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 0
   m_Volume: 1
@@ -71223,7 +71223,7 @@ AudioSource:
   m_GameObject: {fileID: 1709459808}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: 24300002, guid: 04451fcc4af4e43b18b8be1e041019b0, type: 2}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
   m_Volume: 1
@@ -71332,10 +71332,10 @@ AudioSource:
   m_GameObject: {fileID: 1709459808}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: 24300002, guid: 04451fcc4af4e43b18b8be1e041019b0, type: 2}
   m_audioClip: {fileID: 8300000, guid: 92e75fb16a8c19345b46c347c272817a, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 1
+  m_Volume: 0.12
   m_Pitch: 1
   Loop: 1
   Mute: 0
@@ -71583,6 +71583,10 @@ MonoBehaviour:
       m_Calls: []
     m_ActionId: 9e52cbc7-0b11-4f25-a1d7-cad93602f0da
     m_ActionName: Player/Reload[/Keyboard/r]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: e2eaeba8-d4b0-4df4-a48f-d60fef9f618e
+    m_ActionName: GloomProjectileController/ProjectileSpin[/Mouse/delta/x,/Keyboard/d,/Keyboard/a]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: Keyboard&Mouse
   m_DefaultActionMap: Player
@@ -71997,6 +72001,10 @@ MonoBehaviour:
       m_Calls: []
     m_ActionId: a5553cd0-10d1-438b-9c07-69135616c446
     m_ActionName: GloomProjectileController/CheckGloomPitch[/Keyboard/s]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: e2eaeba8-d4b0-4df4-a48f-d60fef9f618e
+    m_ActionName: GloomProjectileController/ProjectileSpin[/Mouse/delta/x,/Keyboard/d,/Keyboard/a]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: GloomProjectileController
