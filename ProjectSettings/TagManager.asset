@@ -8,6 +8,7 @@ TagManager:
   - Enemy
   - EnemySuccess
   - GloomProjectileController
+  - JoyProjectile
   layers:
   - Default
   - TransparentFX
@@ -47,6 +48,9 @@ TagManager:
     locked: 0
   - name: background_decor
     uniqueID: 2779556253
+    locked: 0
+  - name: boundary
+    uniqueID: 4192616763
     locked: 0
   - name: doodads
     uniqueID: 4294673177
