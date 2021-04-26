@@ -5,6 +5,12 @@ using UnityEngine;
 
 public class GloomProjectileController : MonoBehaviour, Ld48deeperanddeeper.IGloomProjectileControllerActions
 {
+    public GameObject gloomPrefab;
+    public GameObject gloomPosition1;
+    public GameObject gloomPosition2;
+    public GameObject gloomPosition3;
+    
+    private const int MAX_GLOOM_PROJECTILES = 3;
     private float moveSpeed = 2.0f;
     private List<GloomProjectile> gloomProjectiles;
     private int activeIdx = -1; // Index of the selected projectile
@@ -33,9 +39,10 @@ public class GloomProjectileController : MonoBehaviour, Ld48deeperanddeeper.IGlo
         // Get gloom projectile inventory
         for (int i = 0; i < transform.childCount; i++)
         {
-            if (transform.GetChild(i).CompareTag("GloomProjectile"))
+            GameObject positionObject = transform.GetChild(i).gameObject;
+            if (positionObject.transform.GetChild(0).CompareTag("GloomProjectile"))
             {
-                gloomProjectiles.Add(transform.GetChild(i).gameObject.GetComponent<GloomProjectile>());
+                gloomProjectiles.Add(positionObject.transform.GetChild(0).gameObject.GetComponent<GloomProjectile>());
             }
         }
 
@@ -156,5 +163,48 @@ public class GloomProjectileController : MonoBehaviour, Ld48deeperanddeeper.IGlo
             activeIdx = 0;
         }
         gloomProjectiles[activeIdx].ActivateHighlight();
+    }
+
+    public bool CanAddAnotherGloom()
+    {
+        return gloomProjectiles.Count < MAX_GLOOM_PROJECTILES;
+    }
+
+    // TODO - use the parameter (% of juice obtained from meter) to set the pitch of the new gloom projectile
+    // Add gloom ands sets position and highlight
+    public void AddGloom(float percent)
+    {
+        if (activeIdx >= 0)
+        {
+            gloomProjectiles[activeIdx].DeactivateHighlight();
+        }
+        
+        if (gloomProjectiles.Count < MAX_GLOOM_PROJECTILES)
+        {
+            GameObject gloomObject = Instantiate(gloomPrefab, transform);
+            GloomProjectile gloomProjectile = gloomObject.GetComponent<GloomProjectile>();
+            gloomProjectiles.Add(gloomProjectile);
+            activeIdx = gloomProjectiles.Count - 1;
+            gloomProjectile.ActivateHighlight();
+            UpdateGloomPositionAndParent(gloomObject);
+        }
+    }
+
+    // Set position of new gloom
+    private void UpdateGloomPositionAndParent(GameObject gloomObject)
+    {
+        if (gloomProjectiles.Count == 1)
+        {
+            gloomObject.transform.position = gloomPosition1.transform.position;
+            gloomObject.transform.parent = gloomPosition1.transform;
+        } else if (gloomProjectiles.Count == 2)
+        {
+            gloomObject.transform.position = gloomPosition2.transform.position;
+            gloomObject.transform.parent = gloomPosition2.transform;
+        } else if (gloomProjectiles.Count == 3)
+        {
+            gloomObject.transform.position = gloomPosition3.transform.position;
+            gloomObject.transform.parent = gloomPosition3.transform;
+        }
     }
 }

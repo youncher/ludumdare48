@@ -3,9 +3,7 @@ using UnityEngine.InputSystem;
 
 public class PlayerController : MonoBehaviour, Ld48deeperanddeeper.IPlayerActions
 {
-    public AudioClip ouchSound;
-    public AudioClip throwSound;
-    public AudioClip walkSound;
+    public VoidMeter voidMeter;
     private AudioSource playerAudio;
     private GloomProjectileController gloomProjectileController;
     private AudioSource chargingAudio;
@@ -13,6 +11,9 @@ public class PlayerController : MonoBehaviour, Ld48deeperanddeeper.IPlayerAction
     Ld48deeperanddeeper controls;
 
     private bool isCharging;
+    private float chargeBegValue = 0.0f; // Value of meter when we started charging
+    private float chargeEndValue = 0.0f; // Value of meter when we stopped charging
+    
     public void OnEnable()
     {
         if (controls == null)
@@ -67,10 +68,10 @@ public class PlayerController : MonoBehaviour, Ld48deeperanddeeper.IPlayerAction
             transform.position = new Vector2(transform.position.x, transform.position.y - 1);
         }
 #endif
-        // TODO: if selecting inventory
-
-        // TODO: if got power up
-
+        if (isCharging)
+        {
+            bool meterHasMoreJuice = voidMeter.DecreaseMeter();
+        }
     }
     public void OnMove(InputAction.CallbackContext context)
     {
@@ -96,6 +97,7 @@ public class PlayerController : MonoBehaviour, Ld48deeperanddeeper.IPlayerAction
     {
 
     }
+    
     public void OnFire(InputAction.CallbackContext context)
     {
         // Debug.Log($"{context}");
@@ -103,10 +105,6 @@ public class PlayerController : MonoBehaviour, Ld48deeperanddeeper.IPlayerAction
         if (context.phase == InputActionPhase.Started)
         {
             gloomProjectileController.ThrowActiveProjectile();
-            startCharging();
-        } else if(context.phase == InputActionPhase.Canceled)
-        {
-            stopCharging();
         }
     }
 
@@ -118,25 +116,49 @@ public class PlayerController : MonoBehaviour, Ld48deeperanddeeper.IPlayerAction
         }
     }
 
-    private void startCharging()
+    public void OnReload(InputAction.CallbackContext context)
     {
-        if (!isCharging)
+        if (context.phase == InputActionPhase.Started)
+        {
+            StartCharging();
+        } else if(context.phase == InputActionPhase.Canceled)
+        {
+            StopCharging();
+        }
+    }
+
+    // Plays charging sound, stops voidMeter autocharge while charging
+    private void StartCharging()
+    {
+        if (!isCharging && gloomProjectileController.CanAddAnotherGloom())
         {
             chargingAudio.PlayDelayed(0.0f);
             chargingAudio.loop = true;
             isCharging = true;
+            voidMeter.StopAutoCharge();
+            chargeBegValue = voidMeter.GetValue();
         }
     }
 
-    private void continueCharging()
-    {
-
-    }
-
-    private void stopCharging()
+    // Stops charging sound; gets amount charged; creates new gloom from the juice obtained
+    private void StopCharging()
     {
         chargingAudio.loop = false;
         chargingAudio.Stop();
         isCharging = false;
+        chargeEndValue = voidMeter.GetValue();
+        voidMeter.StartAutoCharge();
+        float meterMaxValue = voidMeter.GetCapacity();
+        float meterJuiceObtained = chargeBegValue - chargeEndValue;
+        float meterJuiceObtainedPercentage = meterJuiceObtained / meterMaxValue;
+
+        // If was able to get gloom juice from meter, then create gloom from it
+        if (meterJuiceObtained > 0.0f)
+        {
+            gloomProjectileController.AddGloom(meterJuiceObtainedPercentage);
+        }
+
+        chargeBegValue = 0.0f;
+        chargeEndValue = 0.0f;
     }
 }

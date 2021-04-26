@@ -6,7 +6,8 @@ public class GloomProjectile : MonoBehaviour
     private const float MAX_COLOR_VALUE = 100.0f;
     private const float MIN_COLOR_VALUE = 20.0f;
     private const float BLUE_COLOR_DIFF = 10.0f;
-    
+
+    private GameObject gloomControllerGO;
     private SpriteRenderer spriteRenderer;
     
     private Color color;
@@ -15,7 +16,7 @@ public class GloomProjectile : MonoBehaviour
     private float colorChangeSpeed = 115.0f;
     
     private float moveSpeed = 8.0f;
-    private Vector2 parentPosition;
+    private Vector2 gloomControllerPosition;
     private float xPositionDiff;
     private float yPositionDiff;
     
@@ -23,13 +24,17 @@ public class GloomProjectile : MonoBehaviour
     private AudioSource gloomAudio;
     
     public GameObject highlightPrefab;
-    
-    
+
+    private void Awake()
+    {
+        gloomAudio = GetComponent<AudioSource>();
+    }
+
     // Start is called before the first frame update
     void Start()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
-        gloomAudio = GetComponent<AudioSource>();
+        gloomControllerGO = GameObject.Find("GloomProjectileController").gameObject;
     }
 
 
@@ -62,11 +67,11 @@ public class GloomProjectile : MonoBehaviour
 
     public void ThrowProjectile()
     {
-        // Determine direction of travel by comparing its angle to parent's angle
-        parentPosition = transform.parent.position; 
+        // Determine direction of travel by comparing its angle to gloomControllerGO's angle
+        gloomControllerPosition = gloomControllerGO.transform.position; 
         Vector2 initialProjectilePosition = transform.position;
-        xPositionDiff = initialProjectilePosition.x - parentPosition.x;
-        yPositionDiff = initialProjectilePosition.y - parentPosition.y;
+        xPositionDiff = initialProjectilePosition.x - gloomControllerPosition.x;
+        yPositionDiff = initialProjectilePosition.y - gloomControllerPosition.y;
         activelyThrown = true;
     }
 
