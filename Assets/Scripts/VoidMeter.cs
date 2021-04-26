@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class VoidMeter : MonoBehaviour
 {
-    public static float capacity = 100.0f;
+    public static float capacity = 99.0f;
     public static float value = 50.0f;
     private float timePassed = 0.0f;
     public static float refreshRate = 1.0f;
@@ -27,12 +27,13 @@ public class VoidMeter : MonoBehaviour
         {
             value = Mathf.Clamp(value + 1.0f, 0.0f, capacity);
             timePassed = 0.0f;
-            SetGloomBar(value);
             // Debug.Log($"meter value is now {value}");
+            UpdateGloomBarUI(value);
         }
     }
-    
-    public void SetGloomBar(float gloomValue)
+
+
+    public void UpdateGloomBarUI(float gloomValue)
     {
         slider.value = gloomValue;
     }

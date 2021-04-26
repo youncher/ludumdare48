@@ -53,7 +53,7 @@ public class @Ld48deeperanddeeper : IInputActionCollection, IDisposable
             ],
             ""bindings"": [
                 {
-                    ""name"": ""WASD"",
+                    ""name"": ""Movement"",
                     ""id"": ""00ca640b-d935-4593-8157-c05846ea39b3"",
                     ""path"": ""Dpad"",
                     ""interactions"": """",
@@ -78,17 +78,6 @@ public class @Ld48deeperanddeeper : IInputActionCollection, IDisposable
                     ""name"": ""up"",
                     ""id"": ""8180e8bd-4097-4f4e-ab88-4523101a6ce9"",
                     ""path"": ""<Keyboard>/upArrow"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": "";Keyboard&Mouse"",
-                    ""action"": ""Move"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": true
-                },
-                {
-                    ""name"": ""down"",
-                    ""id"": ""320bffee-a40b-4347-ac70-c210eb8bc73a"",
-                    ""path"": ""<Keyboard>/s"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": "";Keyboard&Mouse"",
@@ -802,6 +791,14 @@ public class @Ld48deeperanddeeper : IInputActionCollection, IDisposable
                     ""expectedControlType"": ""Axis"",
                     ""processors"": """",
                     ""interactions"": """"
+                },
+                {
+                    ""name"": ""CheckGloomPitch"",
+                    ""type"": ""Button"",
+                    ""id"": ""a5553cd0-10d1-438b-9c07-69135616c446"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
                 }
             ],
             ""bindings"": [
@@ -879,6 +876,17 @@ public class @Ld48deeperanddeeper : IInputActionCollection, IDisposable
                     ""processors"": """",
                     ""groups"": ""Keyboard&Mouse"",
                     ""action"": ""ProjectileSpin"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""d0204113-b4c3-4997-a149-8075a83aa4fc"",
+                    ""path"": ""<Keyboard>/s"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard&Mouse"",
+                    ""action"": ""CheckGloomPitch"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -969,6 +977,7 @@ public class @Ld48deeperanddeeper : IInputActionCollection, IDisposable
         // GloomProjectileController
         m_GloomProjectileController = asset.FindActionMap("GloomProjectileController", throwIfNotFound: true);
         m_GloomProjectileController_ProjectileSpin = m_GloomProjectileController.FindAction("ProjectileSpin", throwIfNotFound: true);
+        m_GloomProjectileController_CheckGloomPitch = m_GloomProjectileController.FindAction("CheckGloomPitch", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -1181,11 +1190,13 @@ public class @Ld48deeperanddeeper : IInputActionCollection, IDisposable
     private readonly InputActionMap m_GloomProjectileController;
     private IGloomProjectileControllerActions m_GloomProjectileControllerActionsCallbackInterface;
     private readonly InputAction m_GloomProjectileController_ProjectileSpin;
+    private readonly InputAction m_GloomProjectileController_CheckGloomPitch;
     public struct GloomProjectileControllerActions
     {
         private @Ld48deeperanddeeper m_Wrapper;
         public GloomProjectileControllerActions(@Ld48deeperanddeeper wrapper) { m_Wrapper = wrapper; }
         public InputAction @ProjectileSpin => m_Wrapper.m_GloomProjectileController_ProjectileSpin;
+        public InputAction @CheckGloomPitch => m_Wrapper.m_GloomProjectileController_CheckGloomPitch;
         public InputActionMap Get() { return m_Wrapper.m_GloomProjectileController; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -1198,6 +1209,9 @@ public class @Ld48deeperanddeeper : IInputActionCollection, IDisposable
                 @ProjectileSpin.started -= m_Wrapper.m_GloomProjectileControllerActionsCallbackInterface.OnProjectileSpin;
                 @ProjectileSpin.performed -= m_Wrapper.m_GloomProjectileControllerActionsCallbackInterface.OnProjectileSpin;
                 @ProjectileSpin.canceled -= m_Wrapper.m_GloomProjectileControllerActionsCallbackInterface.OnProjectileSpin;
+                @CheckGloomPitch.started -= m_Wrapper.m_GloomProjectileControllerActionsCallbackInterface.OnCheckGloomPitch;
+                @CheckGloomPitch.performed -= m_Wrapper.m_GloomProjectileControllerActionsCallbackInterface.OnCheckGloomPitch;
+                @CheckGloomPitch.canceled -= m_Wrapper.m_GloomProjectileControllerActionsCallbackInterface.OnCheckGloomPitch;
             }
             m_Wrapper.m_GloomProjectileControllerActionsCallbackInterface = instance;
             if (instance != null)
@@ -1205,6 +1219,9 @@ public class @Ld48deeperanddeeper : IInputActionCollection, IDisposable
                 @ProjectileSpin.started += instance.OnProjectileSpin;
                 @ProjectileSpin.performed += instance.OnProjectileSpin;
                 @ProjectileSpin.canceled += instance.OnProjectileSpin;
+                @CheckGloomPitch.started += instance.OnCheckGloomPitch;
+                @CheckGloomPitch.performed += instance.OnCheckGloomPitch;
+                @CheckGloomPitch.canceled += instance.OnCheckGloomPitch;
             }
         }
     }
@@ -1277,5 +1294,6 @@ public class @Ld48deeperanddeeper : IInputActionCollection, IDisposable
     public interface IGloomProjectileControllerActions
     {
         void OnProjectileSpin(InputAction.CallbackContext context);
+        void OnCheckGloomPitch(InputAction.CallbackContext context);
     }
 }

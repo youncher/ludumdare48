@@ -87,7 +87,15 @@ public class GloomProjectileController : MonoBehaviour, Ld48deeperanddeeper.IGlo
             spin = false;
         }
     }
-    
+
+    public void OnCheckGloomPitch(InputAction.CallbackContext context)
+    {
+        if (context.phase == InputActionPhase.Started)
+        {
+            gloomProjectiles[activeIdx].PlayActivePitch();
+        }
+    }
+
     public void ThrowActiveProjectile()
     {
         Debug.Log("Projectiles count: " + gloomProjectiles.Count);

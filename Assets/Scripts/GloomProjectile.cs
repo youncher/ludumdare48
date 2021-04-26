@@ -73,19 +73,24 @@ public class GloomProjectile : MonoBehaviour
     // Highlight this projectile to indicate that it is currently selected
     public void ActivateHighlight()
     {
-        // TODO: There's overlapping of sounds when changing projectiles too fast. Will need to troubleshoot
-        gloomAudio.Stop();
-        gloomAudio.Play();
+        PlayActivePitch();
         GameObject highlightObject = Instantiate(highlightPrefab, transform);
         highlightObject.transform.parent = transform;
     }
     
     public void DeactivateHighlight()
     {
+        gloomAudio.Stop();
         Destroy(gameObject.transform.GetChild(0).gameObject);
     }
 
     public bool GetActivelyThrown() {
         return activelyThrown;
+    }
+
+    public void PlayActivePitch()
+    {
+        gloomAudio.Stop();
+        gloomAudio.Play();
     }
 }
