@@ -3,6 +3,9 @@ using UnityEngine;
 
 public class GloomProjectile : MonoBehaviour
 {
+    private const float MAX_GLOOM_PITCH = 3.0f;
+    private const float MIN_GLOOM_PITCH = 0.25f; // It's hard to hear the pitch lower than this
+
     private const float MAX_COLOR_VALUE = 100.0f;
     private const float MIN_COLOR_VALUE = 20.0f;
     private const float BLUE_COLOR_DIFF = 10.0f;
@@ -97,5 +100,11 @@ public class GloomProjectile : MonoBehaviour
     {
         gloomAudio.Stop();
         gloomAudio.Play();
+    }
+    
+    // Parameter: meterPercent - % of meter used to create gloom
+    public void SetGloomPitch(float meterPercent)
+    {
+        gloomAudio.pitch = Mathf.Clamp(MAX_GLOOM_PITCH - (MAX_GLOOM_PITCH * meterPercent), MIN_GLOOM_PITCH, MAX_GLOOM_PITCH);;
     }
 }

@@ -172,7 +172,8 @@ public class GloomProjectileController : MonoBehaviour, Ld48deeperanddeeper.IGlo
 
     // TODO - use the parameter (% of juice obtained from meter) to set the pitch of the new gloom projectile
     // Add gloom ands sets position and highlight
-    public void AddGloom(float percent)
+    // Parameter: meterPercent - % of meter used to create gloom
+    public void AddGloom(float meterPercent)
     {
         if (activeIdx >= 0)
         {
@@ -183,6 +184,7 @@ public class GloomProjectileController : MonoBehaviour, Ld48deeperanddeeper.IGlo
         {
             GameObject gloomObject = Instantiate(gloomPrefab, transform);
             GloomProjectile gloomProjectile = gloomObject.GetComponent<GloomProjectile>();
+            gloomProjectile.SetGloomPitch(meterPercent);
             gloomProjectiles.Add(gloomProjectile);
             activeIdx = gloomProjectiles.Count - 1;
             gloomProjectile.ActivateHighlight();
