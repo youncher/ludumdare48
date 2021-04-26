@@ -20,7 +20,7 @@ public class GloomProjectile : MonoBehaviour
     private float yPositionDiff;
     
     private bool activelyThrown = false; // true when projectile is actively moving from being thrown
-    private AudioSource audio;
+    private AudioSource gloomAudio;
     
     public GameObject highlightPrefab;
     
@@ -29,7 +29,7 @@ public class GloomProjectile : MonoBehaviour
     void Start()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
-        audio = GetComponent<AudioSource>();
+        gloomAudio = GetComponent<AudioSource>();
     }
 
 
@@ -80,7 +80,7 @@ public class GloomProjectile : MonoBehaviour
     
     public void DeactivateHighlight()
     {
-        audio.Stop();
+        gloomAudio.Stop();
         Destroy(gameObject.transform.GetChild(0).gameObject);
     }
 
@@ -90,7 +90,7 @@ public class GloomProjectile : MonoBehaviour
 
     public void PlayActivePitch()
     {
-        audio.Stop();
-        audio.Play();
+        gloomAudio.Stop();
+        gloomAudio.Play();
     }
 }
