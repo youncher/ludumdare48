@@ -13,6 +13,7 @@ public class PlayerController : MonoBehaviour, Ld48deeperanddeeper.IPlayerAction
     private bool isCharging;
     private float chargeBegValue = 0.0f; // Value of meter when we started charging
     private float chargeEndValue = 0.0f; // Value of meter when we stopped charging
+    public bool gameOver { get; set; }
     
     public void OnEnable()
     {
@@ -84,6 +85,8 @@ public class PlayerController : MonoBehaviour, Ld48deeperanddeeper.IPlayerAction
     }
     public void OnMove(InputAction.CallbackContext context)
     {
+        if (gameOver) return;
+        
         // Debug.Log($"{context}");
         // Debug.Log($"{context.control}");
         // Debug.Log($"{context.action}");
@@ -104,11 +107,13 @@ public class PlayerController : MonoBehaviour, Ld48deeperanddeeper.IPlayerAction
     }
     public void OnLook(InputAction.CallbackContext context)
     {
-
+        if (gameOver) return;
     }
     
     public void OnFire(InputAction.CallbackContext context)
     {
+        if (gameOver) return;
+        
         // Debug.Log($"{context}");
         // Debug.Log($"{context.control}");
         if (context.phase == InputActionPhase.Started)
@@ -119,6 +124,8 @@ public class PlayerController : MonoBehaviour, Ld48deeperanddeeper.IPlayerAction
 
     public void OnSelectInventory(InputAction.CallbackContext context)
     {
+        if (gameOver) return;
+        
         if (context.phase == InputActionPhase.Started)
         {
             gloomProjectileController.SelectNextProjectile();
@@ -127,6 +134,8 @@ public class PlayerController : MonoBehaviour, Ld48deeperanddeeper.IPlayerAction
 
     public void OnReload(InputAction.CallbackContext context)
     {
+        if (gameOver) return;
+        
         if (context.phase == InputActionPhase.Started)
         {
             StartCharging();

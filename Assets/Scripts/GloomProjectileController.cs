@@ -18,7 +18,8 @@ public class GloomProjectileController : MonoBehaviour, Ld48deeperanddeeper.IGlo
     // private bool spinClockwise = true;
 
     private float spinVal = 0.0f;
-
+    public bool gameOver { get; set; }
+    
     Ld48deeperanddeeper controls;
 
     public void OnEnable()
@@ -82,6 +83,8 @@ public class GloomProjectileController : MonoBehaviour, Ld48deeperanddeeper.IGlo
 
     public void OnProjectileSpin(InputAction.CallbackContext context)
     {
+        if (gameOver) return;
+        
         // Debug.Log($"{context}");
         // Debug.Log($"{context.control}");
         spinVal = context.ReadValue<float>();
@@ -89,6 +92,8 @@ public class GloomProjectileController : MonoBehaviour, Ld48deeperanddeeper.IGlo
     
     public void OnCheckGloomPitch(InputAction.CallbackContext context)
     {
+        if (gameOver) return;
+        
         if (context.phase == InputActionPhase.Started && activeIdx >= 0)
         {
             gloomProjectiles[activeIdx].PlayActivePitch();
