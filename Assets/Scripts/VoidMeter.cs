@@ -33,13 +33,13 @@ public class VoidMeter : MonoBehaviour
 
     public void IncreaseMeter()
     {
-        ChangeMeter(1.0f, rate);
+        ChangeMeter(1.0f, rate * 5.0f);
     }
     
     // Returns true if there are still things to drain, false if empty
     public bool DecreaseMeter()
     {
-        ChangeMeter(-10.0f, rate * 2.5f);
+        ChangeMeter(-10.0f, rate * 5.0f);
 
         if (value != 0)
         {

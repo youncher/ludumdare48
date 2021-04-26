@@ -804,9 +804,17 @@ public class @Ld48deeperanddeeper : IInputActionCollection, IDisposable
             ""id"": ""d25f56b1-40fa-41c1-93bf-a8070657f9b5"",
             ""actions"": [
                 {
-                    ""name"": ""ProjectileSpin"",
+                    ""name"": ""ProjectileSpinLeft"",
                     ""type"": ""Value"",
                     ""id"": ""db98d730-f45d-44a2-8653-15c5130e30e0"",
+                    ""expectedControlType"": ""Axis"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
+                    ""name"": ""ProjectileSpinRight"",
+                    ""type"": ""Value"",
+                    ""id"": ""00cd8449-a55e-41ce-9562-109096e6f1a1"",
                     ""expectedControlType"": ""Axis"",
                     ""processors"": """",
                     ""interactions"": """"
@@ -828,7 +836,7 @@ public class @Ld48deeperanddeeper : IInputActionCollection, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""ProjectileSpin"",
+                    ""action"": ""ProjectileSpinLeft"",
                     ""isComposite"": true,
                     ""isPartOfComposite"": false
                 },
@@ -839,31 +847,9 @@ public class @Ld48deeperanddeeper : IInputActionCollection, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Keyboard&Mouse"",
-                    ""action"": ""ProjectileSpin"",
+                    ""action"": ""ProjectileSpinLeft"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
-                },
-                {
-                    ""name"": ""positive"",
-                    ""id"": ""72e0fd70-9d35-484d-8052-99f891742cad"",
-                    ""path"": ""<Keyboard>/d"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Keyboard&Mouse"",
-                    ""action"": ""ProjectileSpin"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": true
-                },
-                {
-                    ""name"": ""1D Axis"",
-                    ""id"": ""9240101e-ab1e-417b-bc0d-aff42da44767"",
-                    ""path"": ""1DAxis(whichSideWins=1)"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""ProjectileSpin"",
-                    ""isComposite"": true,
-                    ""isPartOfComposite"": false
                 },
                 {
                     ""name"": ""negative"",
@@ -872,18 +858,7 @@ public class @Ld48deeperanddeeper : IInputActionCollection, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Gamepad"",
-                    ""action"": ""ProjectileSpin"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": true
-                },
-                {
-                    ""name"": ""positive"",
-                    ""id"": ""3c30f6cb-1c4e-44fc-a6d8-0332afaa7e40"",
-                    ""path"": ""<Gamepad>/rightShoulder"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Gamepad"",
-                    ""action"": ""ProjectileSpin"",
+                    ""action"": ""ProjectileSpinLeft"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
                 },
@@ -894,7 +869,51 @@ public class @Ld48deeperanddeeper : IInputActionCollection, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Keyboard&Mouse"",
-                    ""action"": ""ProjectileSpin"",
+                    ""action"": ""ProjectileSpinLeft"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""1D Axis"",
+                    ""id"": ""2e457b28-00ed-4fd9-bb3e-1e1e3c7dd0e9"",
+                    ""path"": ""1DAxis"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""ProjectileSpinRight"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""positive"",
+                    ""id"": ""77497ac8-5aa0-4657-a31f-51ecf2e4b837"",
+                    ""path"": ""<Keyboard>/d"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard&Mouse"",
+                    ""action"": ""ProjectileSpinRight"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""positive"",
+                    ""id"": ""5791d272-bd5e-4c4a-87f4-174ba0c258a3"",
+                    ""path"": ""<Gamepad>/rightShoulder"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""ProjectileSpinRight"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""41a1c052-fbec-4baa-b121-e086b3259fe1"",
+                    ""path"": ""<Pointer>/delta/x"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard&Mouse"",
+                    ""action"": ""ProjectileSpinRight"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -996,7 +1015,8 @@ public class @Ld48deeperanddeeper : IInputActionCollection, IDisposable
         m_UI_TrackedDeviceOrientation = m_UI.FindAction("TrackedDeviceOrientation", throwIfNotFound: true);
         // GloomProjectileController
         m_GloomProjectileController = asset.FindActionMap("GloomProjectileController", throwIfNotFound: true);
-        m_GloomProjectileController_ProjectileSpin = m_GloomProjectileController.FindAction("ProjectileSpin", throwIfNotFound: true);
+        m_GloomProjectileController_ProjectileSpinLeft = m_GloomProjectileController.FindAction("ProjectileSpinLeft", throwIfNotFound: true);
+        m_GloomProjectileController_ProjectileSpinRight = m_GloomProjectileController.FindAction("ProjectileSpinRight", throwIfNotFound: true);
         m_GloomProjectileController_CheckGloomPitch = m_GloomProjectileController.FindAction("CheckGloomPitch", throwIfNotFound: true);
     }
 
@@ -1217,13 +1237,15 @@ public class @Ld48deeperanddeeper : IInputActionCollection, IDisposable
     // GloomProjectileController
     private readonly InputActionMap m_GloomProjectileController;
     private IGloomProjectileControllerActions m_GloomProjectileControllerActionsCallbackInterface;
-    private readonly InputAction m_GloomProjectileController_ProjectileSpin;
+    private readonly InputAction m_GloomProjectileController_ProjectileSpinLeft;
+    private readonly InputAction m_GloomProjectileController_ProjectileSpinRight;
     private readonly InputAction m_GloomProjectileController_CheckGloomPitch;
     public struct GloomProjectileControllerActions
     {
         private @Ld48deeperanddeeper m_Wrapper;
         public GloomProjectileControllerActions(@Ld48deeperanddeeper wrapper) { m_Wrapper = wrapper; }
-        public InputAction @ProjectileSpin => m_Wrapper.m_GloomProjectileController_ProjectileSpin;
+        public InputAction @ProjectileSpinLeft => m_Wrapper.m_GloomProjectileController_ProjectileSpinLeft;
+        public InputAction @ProjectileSpinRight => m_Wrapper.m_GloomProjectileController_ProjectileSpinRight;
         public InputAction @CheckGloomPitch => m_Wrapper.m_GloomProjectileController_CheckGloomPitch;
         public InputActionMap Get() { return m_Wrapper.m_GloomProjectileController; }
         public void Enable() { Get().Enable(); }
@@ -1234,9 +1256,12 @@ public class @Ld48deeperanddeeper : IInputActionCollection, IDisposable
         {
             if (m_Wrapper.m_GloomProjectileControllerActionsCallbackInterface != null)
             {
-                @ProjectileSpin.started -= m_Wrapper.m_GloomProjectileControllerActionsCallbackInterface.OnProjectileSpin;
-                @ProjectileSpin.performed -= m_Wrapper.m_GloomProjectileControllerActionsCallbackInterface.OnProjectileSpin;
-                @ProjectileSpin.canceled -= m_Wrapper.m_GloomProjectileControllerActionsCallbackInterface.OnProjectileSpin;
+                @ProjectileSpinLeft.started -= m_Wrapper.m_GloomProjectileControllerActionsCallbackInterface.OnProjectileSpinLeft;
+                @ProjectileSpinLeft.performed -= m_Wrapper.m_GloomProjectileControllerActionsCallbackInterface.OnProjectileSpinLeft;
+                @ProjectileSpinLeft.canceled -= m_Wrapper.m_GloomProjectileControllerActionsCallbackInterface.OnProjectileSpinLeft;
+                @ProjectileSpinRight.started -= m_Wrapper.m_GloomProjectileControllerActionsCallbackInterface.OnProjectileSpinRight;
+                @ProjectileSpinRight.performed -= m_Wrapper.m_GloomProjectileControllerActionsCallbackInterface.OnProjectileSpinRight;
+                @ProjectileSpinRight.canceled -= m_Wrapper.m_GloomProjectileControllerActionsCallbackInterface.OnProjectileSpinRight;
                 @CheckGloomPitch.started -= m_Wrapper.m_GloomProjectileControllerActionsCallbackInterface.OnCheckGloomPitch;
                 @CheckGloomPitch.performed -= m_Wrapper.m_GloomProjectileControllerActionsCallbackInterface.OnCheckGloomPitch;
                 @CheckGloomPitch.canceled -= m_Wrapper.m_GloomProjectileControllerActionsCallbackInterface.OnCheckGloomPitch;
@@ -1244,9 +1269,12 @@ public class @Ld48deeperanddeeper : IInputActionCollection, IDisposable
             m_Wrapper.m_GloomProjectileControllerActionsCallbackInterface = instance;
             if (instance != null)
             {
-                @ProjectileSpin.started += instance.OnProjectileSpin;
-                @ProjectileSpin.performed += instance.OnProjectileSpin;
-                @ProjectileSpin.canceled += instance.OnProjectileSpin;
+                @ProjectileSpinLeft.started += instance.OnProjectileSpinLeft;
+                @ProjectileSpinLeft.performed += instance.OnProjectileSpinLeft;
+                @ProjectileSpinLeft.canceled += instance.OnProjectileSpinLeft;
+                @ProjectileSpinRight.started += instance.OnProjectileSpinRight;
+                @ProjectileSpinRight.performed += instance.OnProjectileSpinRight;
+                @ProjectileSpinRight.canceled += instance.OnProjectileSpinRight;
                 @CheckGloomPitch.started += instance.OnCheckGloomPitch;
                 @CheckGloomPitch.performed += instance.OnCheckGloomPitch;
                 @CheckGloomPitch.canceled += instance.OnCheckGloomPitch;
@@ -1322,7 +1350,8 @@ public class @Ld48deeperanddeeper : IInputActionCollection, IDisposable
     }
     public interface IGloomProjectileControllerActions
     {
-        void OnProjectileSpin(InputAction.CallbackContext context);
+        void OnProjectileSpinLeft(InputAction.CallbackContext context);
+        void OnProjectileSpinRight(InputAction.CallbackContext context);
         void OnCheckGloomPitch(InputAction.CallbackContext context);
     }
 }

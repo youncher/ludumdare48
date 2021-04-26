@@ -78,26 +78,39 @@ public class GloomProjectileController : MonoBehaviour, Ld48deeperanddeeper.IGlo
 
     }
 
-    public void OnProjectileSpin(InputAction.CallbackContext context)
+    public void OnProjectileSpinLeft(InputAction.CallbackContext context)
     {
         spin = true;
         // Debug.Log($"{context}");
         // Debug.Log($"{context.control}");
         if (context.phase == InputActionPhase.Started)
         {
-            spin = true;
-            spinClockwise = context.ReadValue<float>() > 0;
+            spinClockwise = false;
         }
-
         if (context.phase == InputActionPhase.Canceled)
         {
             spin = false;
         }
     }
 
+    public void OnProjectileSpinRight(InputAction.CallbackContext context)
+    {
+        spin = true;
+        // Debug.Log($"{context}");
+        // Debug.Log($"{context.control}");
+        if (context.phase == InputActionPhase.Started)
+        {
+            spinClockwise = true;
+        }
+        if (context.phase == InputActionPhase.Canceled)
+        {
+            spin = false;
+        }
+    }
+    
     public void OnCheckGloomPitch(InputAction.CallbackContext context)
     {
-        if (context.phase == InputActionPhase.Started)
+        if (context.phase == InputActionPhase.Started && activeIdx >= 0)
         {
             gloomProjectiles[activeIdx].PlayActivePitch();
         }
