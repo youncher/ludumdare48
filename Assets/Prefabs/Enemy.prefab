@@ -334,3 +334,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   AnnounceFreqSec: 2
   AnnounceSound: {fileID: 8300000, guid: 657578e4be6b64dbf9b09deada272e55, type: 3}
+  JoyProjectilePrefab: {fileID: 4020770303363255530, guid: 41e0aa426b606be46b5c040f99452512, type: 3}

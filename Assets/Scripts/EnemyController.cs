@@ -14,6 +14,8 @@ public class EnemyController : MonoBehaviour
     private float maxPitch = GloomProjectile.MaxGloomPitch();
 
     private float minOffsetFromGloom = 10.0f;
+    private GameObject playerGO;
+    public GameObject JoyProjectilePrefab;
 
     void OnEnable()
     {
@@ -24,6 +26,7 @@ public class EnemyController : MonoBehaviour
     void Start()
     {
         sinceLastAnnounce = Random.Range(-AnnounceFreqSec, AnnounceFreqSec);
+        playerGO = GameObject.Find("Player").gameObject;
     }
 
     // Update is called once per frame
@@ -33,7 +36,12 @@ public class EnemyController : MonoBehaviour
         if (sinceLastAnnounce >= AnnounceFreqSec) {
             enemyAudio.PlayOneShot(AnnounceSound, enemyAudio.volume);
             sinceLastAnnounce = 0.0f;
+            // Shoot JoyProjectile
+            //instantiate
+            // Instantiate(JoyProjectilePrefab, transform);
+            //
         }
+
         
     }
     void OnCollisionStay2D(Collision2D col)

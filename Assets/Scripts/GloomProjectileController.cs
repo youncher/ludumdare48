@@ -42,10 +42,16 @@ public class GloomProjectileController : MonoBehaviour, Ld48deeperanddeeper.IGlo
         for (int i = 0; i < transform.childCount; i++)
         {
             GameObject positionObject = transform.GetChild(i).gameObject;
+            Debug.Log($"iterating projectile inventory {i} positon {positionObject.transform.position}");
+            Debug.Log($"child has {positionObject.transform.childCount} of its own");
             if (positionObject.transform.GetChild(0).CompareTag("GloomProjectile"))
             {
+                Debug.Log("Adding gloomprojectile");
                 gloomProjectiles.Add(positionObject.transform.GetChild(0).gameObject.GetComponent<GloomProjectile>());
+            } else {
+                // Debug.Log($"Not adding, tag: {positionObject.transform.GetChild(0).tag}");
             }
+
         }
 
         AutoSetActiveProjectile();
