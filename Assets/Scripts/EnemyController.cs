@@ -15,6 +15,9 @@ public class EnemyController : MonoBehaviour
 
     private float minOffsetFromGloom = 10.0f;
 
+    private GameObject playerGO;
+    public GameObject JoyProjectilePrefab;
+
     void OnEnable()
     {
         moveController = GetComponent<RandomEnemyMovementController>();
@@ -24,6 +27,7 @@ public class EnemyController : MonoBehaviour
     void Start()
     {
         sinceLastAnnounce = Random.Range(-AnnounceFreqSec, AnnounceFreqSec);
+        playerGO = GameObject.Find("Player").gameObject;
     }
 
     // Update is called once per frame
@@ -33,8 +37,17 @@ public class EnemyController : MonoBehaviour
         if (sinceLastAnnounce >= AnnounceFreqSec) {
             enemyAudio.PlayOneShot(AnnounceSound, enemyAudio.volume);
             sinceLastAnnounce = 0.0f;
+            // Shoot JoyProjectile
+            // instantiate
+            GameObject projectileGO = Instantiate(JoyProjectilePrefab, transform);
+            // player direction
+            JoyProjectile joyProjectile = projectileGO.GetComponent<JoyProjectile>();
+            var projectilePos = new Vector2(projectileGO.transform.position.x, projectileGO.transform.position.y);
+            var playerPos = new Vector2(playerGO.transform.position.x, playerGO.transform.position.y);
+            var diff = playerPos - projectilePos;
+            diff.Normalize();
+            joyProjectile.SetVector(diff);
         }
-        
     }
     void OnCollisionStay2D(Collision2D col)
     {
