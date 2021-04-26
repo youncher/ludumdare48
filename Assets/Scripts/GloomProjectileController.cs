@@ -78,26 +78,39 @@ public class GloomProjectileController : MonoBehaviour, Ld48deeperanddeeper.IGlo
 
     }
 
-    public void OnProjectileSpin(InputAction.CallbackContext context)
+    public void OnProjectileSpinLeft(InputAction.CallbackContext context)
     {
         spin = true;
         // Debug.Log($"{context}");
         // Debug.Log($"{context.control}");
         if (context.phase == InputActionPhase.Started)
         {
-            spin = true;
-            spinClockwise = context.ReadValue<float>() > 0;
+            spinClockwise = false;
         }
-
         if (context.phase == InputActionPhase.Canceled)
         {
             spin = false;
         }
     }
 
+    public void OnProjectileSpinRight(InputAction.CallbackContext context)
+    {
+        spin = true;
+        // Debug.Log($"{context}");
+        // Debug.Log($"{context.control}");
+        if (context.phase == InputActionPhase.Started)
+        {
+            spinClockwise = true;
+        }
+        if (context.phase == InputActionPhase.Canceled)
+        {
+            spin = false;
+        }
+    }
+    
     public void OnCheckGloomPitch(InputAction.CallbackContext context)
     {
-        if (context.phase == InputActionPhase.Started)
+        if (context.phase == InputActionPhase.Started && activeIdx >= 0)
         {
             gloomProjectiles[activeIdx].PlayActivePitch();
         }
@@ -172,7 +185,8 @@ public class GloomProjectileController : MonoBehaviour, Ld48deeperanddeeper.IGlo
 
     // TODO - use the parameter (% of juice obtained from meter) to set the pitch of the new gloom projectile
     // Add gloom ands sets position and highlight
-    public void AddGloom(float percent)
+    // Parameter: meterPercent - % of meter used to create gloom
+    public void AddGloom(float meterPercent)
     {
         if (activeIdx >= 0)
         {
@@ -183,6 +197,7 @@ public class GloomProjectileController : MonoBehaviour, Ld48deeperanddeeper.IGlo
         {
             GameObject gloomObject = Instantiate(gloomPrefab, transform);
             GloomProjectile gloomProjectile = gloomObject.GetComponent<GloomProjectile>();
+            gloomProjectile.SetGloomPitch(meterPercent);
             gloomProjectiles.Add(gloomProjectile);
             activeIdx = gloomProjectiles.Count - 1;
             gloomProjectile.ActivateHighlight();
