@@ -12,7 +12,7 @@ TagManager:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - doodads
   - Water
   - UI
   - 
@@ -42,6 +42,15 @@ TagManager:
   - 
   - 
   m_SortingLayers:
+  - name: background
+    uniqueID: 3497949485
+    locked: 0
+  - name: background_decor
+    uniqueID: 2779556253
+    locked: 0
+  - name: doodads
+    uniqueID: 4294673177
+    locked: 0
   - name: Default
     uniqueID: 0
     locked: 0
