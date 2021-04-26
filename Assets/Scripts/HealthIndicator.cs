@@ -15,7 +15,7 @@ public class HealthIndicator : MonoBehaviour
     }
 
     // Subtract one life and updates UI
-    public void reduceLife()
+    public void ReduceLife()
     {
         if (currentLife > 0)
         {

@@ -6,6 +6,7 @@ TagManager:
   tags:
   - GloomProjectile
   - Enemy
+  - EnemySuccess
   layers:
   - Default
   - TransparentFX

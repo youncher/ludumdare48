@@ -64,4 +64,13 @@ public class EnemyController : MonoBehaviour
             }
         }
     }
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.gameObject.tag == "EnemySuccess") {
+            Debug.Log("collided with a trigger tagged EnemySuccess");
+            Destroy(gameObject);
+            var hi = FindObjectOfType<HealthIndicator>();
+            hi.ReduceLife();
+        }
+    }
 }
