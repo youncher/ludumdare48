@@ -47,6 +47,10 @@ public class GameManager : MonoBehaviour
             player.gameOver = true;
             gameOverDisplay.gameObject.SetActive(true);
             gameOverDisplay.DisplayGameOver(winStatus);
+            if (winStatus == "win") {
+                var audioSource = GetComponent<AudioSource>();
+                audioSource.Play();
+            }
         }
     }
     
