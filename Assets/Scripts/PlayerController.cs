@@ -191,7 +191,7 @@ public class PlayerController : MonoBehaviour, Ld48deeperanddeeper.IPlayerAction
     }
     private void CollisionHandler(Collision2D col)
     {
-        if (!col.gameObject.CompareTag("JoyProjectile"))
+        if (!col.gameObject.CompareTag("JoyProjectile") || gameOver)
         {
             return;
         }

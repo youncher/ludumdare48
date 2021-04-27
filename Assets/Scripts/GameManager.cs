@@ -12,14 +12,14 @@ public class GameManager : MonoBehaviour
     public GameObject gloomProjectileControllerGO;
     public GameObject targetCounterTextGO;
     
-    private const int MAX_LEVEL_TO_WIN = 3;
+    private const int MAX_LEVEL_TO_WIN = 1;
     private PlayerController player;
     private GameOverDisplay gameOverDisplay;
     private GloomProjectileController gloomProjectileController;
     private TextMeshProUGUI targetCounterText;
     
     private int currentLevel = 1;
-
+    private bool gameOver = false;
 
     void Start()
     {
@@ -41,10 +41,13 @@ public class GameManager : MonoBehaviour
     // Parameter: string - "win" or "lose"
     public void HandleGameOver(string winStatus)
     {
-        gloomProjectileController.gameOver = true;
-        player.gameOver = true;
-        gameOverDisplay.gameObject.SetActive(true);
-        gameOverDisplay.DisplayGameOver(winStatus);
+        if (!gameOver){
+            gameOver = true;
+            gloomProjectileController.gameOver = true;
+            player.gameOver = true;
+            gameOverDisplay.gameObject.SetActive(true);
+            gameOverDisplay.DisplayGameOver(winStatus);
+        }
     }
     
     public void LoadLevel1()

@@ -465,7 +465,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 7.2589, y: -80.2926}
+  m_AnchoredPosition: {x: 7.258911, y: -80.2926}
   m_SizeDelta: {x: 14.518, y: 160.5751}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1673796658
@@ -488,7 +488,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Welcome to our game!!!
+  m_text: Gloomby's Misadventure
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -714,8 +714,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0.5}
   m_AnchorMax: {x: 1, y: 0.5}
-  m_AnchoredPosition: {x: -253, y: 18.746}
-  m_SizeDelta: {x: 506, y: 241.35}
+  m_AnchoredPosition: {x: -423.9, y: 18.746}
+  m_SizeDelta: {x: 846.86, y: 241.35}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1779228679
 MonoBehaviour:
@@ -740,20 +740,23 @@ MonoBehaviour:
   m_text: 'KEYS:
 
 
-    - Arrow keys = Move player
+    Arrow keys = Movement
 
-    - Spacebar = Fire gloom ball
+    Spacebar [left mouse button] =
+    Fire
 
-    -
-    R = Reload (Max balls = 3)
+    R [middle mouse button] = Reload gloom spheres (Maximum inventory
+    is 3)
 
-    - A/D = Move gloom balls left/right
+    A, D [mouse left/right] = Aim gloom spheres
 
-    - S
-    = Listen to the pitch of current gloom ball
+    S [mouse back button]
+    = Listen to the pitch of the current gloom sphere
 
-    - F  = Select different gloom
-    ball'
+    F [right mouse button]
+    = Select a different gloom sphere
+
+'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
